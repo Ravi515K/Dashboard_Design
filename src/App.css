@@ -1,0 +1,22 @@
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  font-family: 'Roboto', sans-serif;
+}
+#top-text{
+  margin-left: 40px;
+}
+
+
+.ul-sidebar{
+  width:200px;
+  
+}
+.profile{
+  display: grid;
+  justify-content: center;
+  margin-right: 40px;
+}
