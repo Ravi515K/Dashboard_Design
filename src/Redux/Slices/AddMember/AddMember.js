@@ -5,7 +5,7 @@ const initialState = {
   data:[],
   isModal:false,
 }
-console.log(initialState.data)
+// console.log(initialState.data)
 export const AddMemberSlice = createSlice({
   name: 'addMember',
   initialState,

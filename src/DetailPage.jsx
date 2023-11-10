@@ -43,7 +43,7 @@ function DetailPage() {
               {`Hello, I'm from ${obj[0].role} background!`}
             </p>
           </div>
-         
+         <h1>red</h1>
         </div>
       </div>
       <div>
