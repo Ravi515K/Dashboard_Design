@@ -2,12 +2,12 @@ import React from 'react'
 import { MdShoppingBag } from 'react-icons/md'
 function Cards() {
   return (
-    <>
-      <div className='sm:text-center md:text-left w-2/4 mb-[40px]'>
+    <div className=''>
+      <div className='sm:text-center md:text-left w-2/4 fixed top-0 p-[20px] bg-white z-40'>
         <h1 className='text-xl font-bold'>Dashboard</h1>
         <p className='text-brown text-sm'>4th August 2023</p>
       </div>
-      <div className=' sm:grid-cols-1 gap-6 mx-auto max-w-[1200px] grid lg:grid-cols-3 md:grid-cols-2  '>
+      <div className=' sm:grid-cols-1 gap-6 mx-auto max-w-[1200px] grid lg:grid-cols-3 md:grid-cols-2 py-[90px]'>
         <div className=' bg-custom-blue w-200 h-100 p-2 rounded-lg'>
           <ul >
             <li className='flex'><MdShoppingBag /> Total Earning</li>
@@ -30,7 +30,7 @@ function Cards() {
           <p className='text-center text-sm'>+6.04 greater that last Month</p>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

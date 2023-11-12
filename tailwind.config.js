@@ -15,7 +15,8 @@ export default {
         'violet':'#BFAFFB',
         'btn-clr':'#161B18',
          'sky':'#A9C9FC',
-         'middle-bg':'#DBDCDE'
+         'middle-bg':'#DBDCDE',
+         'white':'#FFFFFF'
       },
      
       height: {

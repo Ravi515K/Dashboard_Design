@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {RxCross1} from 'react-icons/rx'
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal, memberData } from '../Redux/Slices/AddMember/AddMember';
+import { closeModal, memberData, singleMemberData } from '../Redux/Slices/AddMember/AddMember';
 function Modal() {
     const dispatch = useDispatch()
     const show = useSelector((state)=> state.AddMember.isModal)
@@ -46,6 +46,7 @@ function Modal() {
             
              dispatch(memberData(formData))
              dispatch(closeModal())
+              dispatch(singleMemberData(formData.id))
              alert('Added Member Successfully')
           console.log("Form is valid. Data:", formData);
 
@@ -60,7 +61,7 @@ function Modal() {
             dispatch(closeModal())
       }
     return (
-        <div className='fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center'>
+        <div className='fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-40'>
             
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className='flex justify-between'>

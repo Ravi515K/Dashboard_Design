@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  exceptData:[],
   singleData:{},
   data:[],
   isModal:false,
@@ -21,8 +22,15 @@ export const AddMemberSlice = createSlice({
    },
    singleMemberData:(state,action)=>{
       state.singleData=state.data.filter((el)=>{
-        if(el.id==action.payload)
-        return el
+        if(el.id==action.payload){
+          return el
+        }
+        
+      })
+      state.exceptData=state.data.filter((el)=>{
+        if(el.id!==action.payload){
+          return el
+        }
       })
    }
   },

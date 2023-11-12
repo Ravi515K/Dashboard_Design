@@ -19,7 +19,7 @@ function SingleMember({name , role, url,id}) {
             <div className=''>
                 <img className='w-30 h-30 rounded-full' src={url} alt="" />
             </div>
-            <div className='ml-[-50px]'>
+            <div className=' ml-[10px] text-left w-[220px]'>
                 <h1 className='text-[14px] font-medium'>{name}</h1>
                 <p className='text-[9px] text-[#7C7B7C]'>{role}</p>
             </div>

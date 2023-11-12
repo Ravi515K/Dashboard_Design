@@ -19,9 +19,9 @@ function Home() {
  //  console.log(isModal)
 
   return (
-    <div>
-      <div className="w-full flex">
-        <div className="w-1/4 md:w-1/5">
+    <div className="">
+      <div className="w-full flex ">
+        <div className="w-1/4 md:w-1/5 fixed top-[20px] left-0 h-full ">
           <div className="hidden lg:block md:block">
             {" "}
             <Sidebar className="h-200" />
@@ -30,7 +30,8 @@ function Home() {
             <Profile />
           </div>
         </div>
-        <div className="lg:w-2/4 md:w-2/4">
+       
+        <div className="lg:w-2/4 md:w-2/4 ml-[300px] ">
           <div className="">
             <Cards />
           </div>
@@ -57,8 +58,9 @@ function Home() {
             <TeamMember />
           </div>
         </div>
-        <div className=" md:block w-1/4 px-8">
-          <div className="">
+       
+        <div className=" md:block w-1/4 px-10  bg-white">
+          <div className="fixed  top-0 p-[21px]  bg-white z-40">
             <Message />
           </div>
           <div className="mt-[40px]">
