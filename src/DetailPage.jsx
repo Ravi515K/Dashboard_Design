@@ -13,7 +13,7 @@ function DetailPage() {
   const { isModal } = useSelector((state) => state.AddMember);
   const Data = useSelector(state => state.AddMember.exceptData)
   const obj = useSelector((state) => state.AddMember.singleData);
-  console.log(obj)
+  // console.log(Data)
 
   const handleModal = () => {
     dispatch(openModal())
@@ -36,10 +36,10 @@ function DetailPage() {
         <h1 className="text-center mt-[30px] font-semibold text-[20px]">Member Detail</h1>
         <div class="rounded-3xl overflow-hidden shadow-xl max-w-xs my-3 bg-blue-500 ">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScnV2l1M4uA3J-Zcl0KIKKrKhhtmpQnB8CFNm883kR&s" class="w-full" />
-          <div class="flex justify-center -mt-8">
+          <div class="flex justify-center mt-[-100px]">
             <img
               src={obj[0].imgUrl}
-              class="rounded-full  -mt-3"
+              className="rounded-full w-[200px] h-[200px]"
             />
           </div>
           <div class="text-center px-3 pt-2">

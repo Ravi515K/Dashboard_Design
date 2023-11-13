@@ -6,7 +6,7 @@ import {openModal } from '../Redux/Slices/AddMember/AddMember'
 function TeamMember() {
     const dispatch = useDispatch()
     const Data=useSelector(state=>state.AddMember.data)
-    // console.log(Data)
+     console.log(Data)
     // const data = [
     //     {name:'Mahid Ahmed',role:'Product Manager', url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb5q9zsbXW01zLBnO9G6kzKSXKfoDbfqHQfxuNznq_&s'},
     //     {name:'Daqnif kari',role:'Developer', url:'https://www.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg'},

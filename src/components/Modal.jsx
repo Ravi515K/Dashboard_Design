@@ -8,6 +8,7 @@ function Modal() {
     // console.log(show)
     const [formData, setFormData] = useState({
         id:new Date().getTime(),
+        imgFile: null,
         imgUrl: "",
         name: "",
         role: "",
@@ -21,6 +22,28 @@ function Modal() {
           [name]: value,
         });
       };
+
+      const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        
+        // Check if a file is selected
+        if (file) {
+            // Perform file type validation here if needed
+
+            // Update the formData state with the selected file
+            setFormData({
+                ...formData,
+                imgFile: file
+            });
+
+            // Convert the file to a URL
+            const imgUrl = URL.createObjectURL(file);
+            setFormData({
+                ...formData,
+                imgUrl: imgUrl
+            });
+        }
+    };
     
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -69,24 +92,7 @@ function Modal() {
                     <div onClick={handleClose}><RxCross1/></div>
                 </div>
             
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imgUrl">
-                        Image URL
-                    </label>
-                    <input
-                        className={`shadow appearance-none border ${errors.imgUrl ? "border-red-500" : "border-gray-300"} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                        type="text"
-                        id="imgUrl"
-                        name="imgUrl"
-                        value={formData.imgUrl}
-                        onChange={handleInputChange}
-                        placeholder="Image URL"
-                        required
-                    />
-                    {errors.imgUrl && (
-                        <p className="text-red-500 text-xs italic">{errors.imgUrl}</p>
-                    )}
-                </div>
+              
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                         Name
@@ -120,6 +126,25 @@ function Modal() {
                     />
                     {errors.role && (
                         <p className="text-red-500 text-xs italic">{errors.role}</p>
+                    )}
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imgUrl">
+                        Image
+                    </label>
+                    <input
+                        className={`shadow appearance-none border ${errors.imgUrl ? "border-red-500" : "border-gray-300"} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                        type="file"
+                        id="imgUrl"
+                        // name="imgUrl"
+                        accept="image/*"
+                        // value={formData.imgUrl}
+                        onChange={handleImageUpload}
+                        placeholder="Image URL"
+                        required
+                    />
+                    {errors.imgUrl && (
+                        <p className="text-red-500 text-xs italic">{errors.imgUrl}</p>
                     )}
                 </div>
                 <div className="flex items-center justify-between">
