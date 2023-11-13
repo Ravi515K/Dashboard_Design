@@ -60,7 +60,7 @@ function Home() {
         </div>
        
         <div className=" md:block w-1/4 px-10  bg-white">
-          <div className="fixed  top-0 p-[21px]  bg-white z-40">
+          <div className="fixed  top-0 p-[20px]  bg-white z-40">
             <Message />
           </div>
           <div className="mt-[40px]">

@@ -13,7 +13,7 @@ function DetailPage() {
   const { isModal } = useSelector((state) => state.AddMember);
   const Data = useSelector(state => state.AddMember.exceptData)
   const obj = useSelector((state) => state.AddMember.singleData);
-  // console.log(Data)
+ //  console.log(obj)
 
   const handleModal = () => {
     dispatch(openModal())
@@ -38,14 +38,14 @@ function DetailPage() {
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScnV2l1M4uA3J-Zcl0KIKKrKhhtmpQnB8CFNm883kR&s" class="w-full" />
           <div class="flex justify-center mt-[-100px]">
             <img
-              src={obj[0].imgUrl}
+              src={obj.imgUrl}
               className="rounded-full w-[200px] h-[200px]"
             />
           </div>
           <div class="text-center px-3 pt-2">
-            <h3 class="text-black text-sm bold font-sans font-semibold uppercase ">{obj[0].name}</h3>
+            <h3 class="text-black text-sm bold font-sans font-semibold uppercase ">{obj.name}</h3>
             <p class="mt-2 font-sans font-light text-black">
-              Hello, I'm from <span className="font-semibold">{obj[0].role}</span> background!
+              Hello, I'm from <span className="font-semibold">{obj.role}</span> background!
             </p>
           </div>
 

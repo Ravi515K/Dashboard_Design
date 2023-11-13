@@ -10,7 +10,7 @@ function SingleMember({name , role, url,id}) {
     const navigate = useNavigate()
     
     const goToDetailPage = (id) =>{
-        console.log(id)
+       // console.log(id)
             dispatch(singleMemberData(id))
             navigate('/detail')
     }

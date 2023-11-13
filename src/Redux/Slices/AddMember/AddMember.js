@@ -1,42 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  exceptData:[],
-  singleData:{},
-  data:[],
-  isModal:false,
-}
+  uniqueId: null,
+  exceptData: [],
+  singleData: {},
+  data: [],
+  isModal: false,
+};
 // console.log(initialState.data)
 export const AddMemberSlice = createSlice({
-  name: 'addMember',
+  name: "addMember",
   initialState,
   reducers: {
     openModal: (state) => {
-      state.isModal=true
+      state.isModal = true;
     },
-   closeModal:(state)=>{
-    state.isModal=false
-   },
-   memberData:(state,action)=>{
-    state.data.unshift(action.payload)
-   },
-   singleMemberData:(state,action)=>{
-      state.singleData=state.data.filter((el)=>{
-        if(el.id==action.payload){
-          return el
-        }
-        
-      })
-      state.exceptData=state.data.filter((el)=>{
-        if(el.id!==action.payload){
-          return el
-        }
-      })
-   }
+    closeModal: (state) => {
+      state.isModal = false;
+    },
+    memberData: (state, action) => {
+      state.data.unshift(action.payload);
+    },
+    singleMemberData: (state, action) => {
+      const targetId = action.payload;
+      state.uniqueId = targetId;
+
+      const foundMember = state.data.find((el) => el.id === targetId);
+      state.singleData = foundMember || {};
+
+      state.exceptData = state.data.filter((el) => el.id !== targetId);
+    },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { openModal,closeModal,memberData, singleMemberData } = AddMemberSlice.actions
+export const { openModal, closeModal, memberData, singleMemberData } =
+  AddMemberSlice.actions;
 
-export default AddMemberSlice.reducer
+export default AddMemberSlice.reducer;

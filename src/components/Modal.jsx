@@ -25,7 +25,7 @@ function Modal() {
 
       const handleImageUpload = (e) => {
         const file = e.target.files[0];
-        
+       // console.log(e.target.files)
         // Check if a file is selected
         if (file) {
             // Perform file type validation here if needed
@@ -69,7 +69,7 @@ function Modal() {
             
              dispatch(memberData(formData))
              dispatch(closeModal())
-              dispatch(singleMemberData(formData.id))
+             // dispatch(singleMemberData(formData.id))
              alert('Added Member Successfully')
           console.log("Form is valid. Data:", formData);
 
