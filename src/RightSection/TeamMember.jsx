@@ -17,7 +17,7 @@ function TeamMember() {
            dispatch(openModal())
     }
     return (
-        <div className='mt-6 shadow-md px-4 py-2'>
+        <div className='mt-[120px] shadow-md px-4 py-2'>
             <h1 className='text-[17px] font-medium'>Team Member</h1>
             <div className='max-h-[200px] overflow-y-scroll'>
                {Data.map((el,index)=>(

@@ -2,9 +2,10 @@ import React from "react";
 
 function SingleCard({data}) {
     const {icon,heading,follow, statement,clr} = data
+    // console.log(clr)
   return (
-    <div>
-      <div className={`bg-${clr} w-200 h-100 p-2 rounded-lg`}>
+    
+      <div className={`${clr}  w-[200pxvw] h-[200pxvh] p-2 rounded-lg`}>
         <ul>
           <li className="flex">
             {icon} {heading}
@@ -13,7 +14,7 @@ function SingleCard({data}) {
         <h2 className="text-center">{follow}</h2>
         <p className="text-center text-sm">{statement}</p>
       </div>
-    </div>
+ 
   );
 }
 

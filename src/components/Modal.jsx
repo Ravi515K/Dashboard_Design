@@ -69,7 +69,7 @@ function Modal() {
             
              dispatch(memberData(formData))
              dispatch(closeModal())
-             // dispatch(singleMemberData(formData.id))
+              dispatch(singleMemberData(formData.id))
              alert('Added Member Successfully')
           console.log("Form is valid. Data:", formData);
 

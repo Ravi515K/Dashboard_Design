@@ -19,11 +19,10 @@ function Home() {
  //  console.log(isModal)
 
   return (
-    <div className="">
-      <div className="w-full flex ">
-        <div className="w-1/4 md:w-1/5 fixed top-[20px] left-0 h-full ">
+    <div className="sm-text-sm md:text-md">
+      <div className="w-full flex">
+        <div className="w-1/4 fixed top-[20px] md:w-[20%vw] md:z-50 left-0 h-full">
           <div className="hidden lg:block md:block">
-            {" "}
             <Sidebar className="h-200" />
           </div>
           <div className="hidden lg:block md:block">
@@ -31,7 +30,7 @@ function Home() {
           </div>
         </div>
        
-        <div className="lg:w-2/4 md:w-2/4 ml-[300px] ">
+        <div className="lg:w-2/4 md:w-[55%vw] md:px-2 lg:ml-[300px] md:ml-[100px] sm:w-[100%] overflow-auto">
           <div className="">
             <Cards />
           </div>
@@ -43,24 +42,23 @@ function Home() {
               <Analysis className="w-1/2 ml-12" />
             </div>
           </div>
-          <div className="">
-            {" "}
+          <div className="p-2">
             <TopStore />
           </div>
 
-          <div className="lg:hidden md:hidden">
+          <div className="md:hidden">
             <FirstCard />
           </div>
-          <div className="lg:hidden md:hidden sm:py-4 sm:ml-[30px]">
+          <div className="md:hidden sm:py-4 sm:ml-[30px]">
             <Meeting />
           </div>
-          <div className=" lg:hidden md:hidden">
+          <div className="md:hidden">
             <TeamMember />
           </div>
         </div>
        
-        <div className=" md:block w-1/4 px-10  bg-white">
-          <div className="fixed  top-0 p-[20px]  bg-white z-40">
+        <div className="hidden md:px-2  md:grid justify-center md:w-[35%vw]">
+          <div className="fixed w-[100%] top-0 p-[20px]  bg-white z-40">
             <Message />
           </div>
           <div className="mt-[40px]">

@@ -16,7 +16,8 @@ export default {
         'btn-clr':'#161B18',
          'sky':'#A9C9FC',
          'middle-bg':'#DBDCDE',
-         'white':'#FFFFFF'
+         'white':'#FFFFFF',
+         'red':'#A21717'
       },
      
       height: {

@@ -77,15 +77,15 @@ function Sidebar() {
                     <div
                         className={`${showMenu
                             ? 'translate-x-0'
-                            : '-translate-x-full'
-                            } transform fixed top-0 left-0 w-64 h-screen bg-white shadow-lg transition-transform duration-300 ease-in-out`}
+                            : '-translate-x-[100%]'
+                            } transform fixed top-0 left-0 w-[250px] h-screen bg-red shadow-lg transition-transform duration-300 ease-in-out`}
                     >
                         <div className="flex justify-end p-4">
                             <button onClick={closeMenu} className="text-3xl">
                                 &#10005;
                             </button>
                         </div>
-                        <div className='flex lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A mb-[40px]'>
+                        <div className='flex lg:w-1/4 md:w-[20%] w-2/5 text-#4A4D4A mb-[40px]'>
                             <div className='mr-4 mt-2'>
                                 <AiOutlineNumber />
                             </div>

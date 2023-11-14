@@ -2,7 +2,7 @@ import React from 'react'
 import {BsFillCameraVideoFill} from 'react-icons/bs'
 function Meeting() {
     return (
-        <div className='mt-[40px] shadow-md '>
+        <div className='mt-[70px] shadow-md '>
             <div>
                 <div className='flex'>
                     <div className='w-30 h-30 rounded-full flex justify-center items-center bg-violet mr-4'><BsFillCameraVideoFill/></div>
