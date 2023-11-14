@@ -30,7 +30,7 @@ function Home() {
           </div>
         </div>
        
-        <div className="lg:w-2/4 md:w-[55%vw] md:px-2 lg:ml-[300px] md:ml-[100px] sm:w-[100%] overflow-auto">
+        <div className="lg:w-2/4 md:w-[45%vw] md:px-2 lg:ml-[300px] md:ml-[100px] sm:w-[100%] overflow-auto">
           <div className="">
             <Cards />
           </div>
@@ -57,8 +57,8 @@ function Home() {
           </div>
         </div>
        
-        <div className="hidden md:px-2  md:grid justify-center md:w-[35%vw]">
-          <div className="fixed w-[100%] top-0 p-[20px]  bg-white z-40">
+        <div className="hidden lg:w-[25%] md:px-2 md:grid justify-center md:w-[35%]">
+          <div className="fixed w-[100%vw] top-0 p-[20px]  bg-white z-40">
             <Message />
           </div>
           <div className="mt-[40px]">

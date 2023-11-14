@@ -2,7 +2,7 @@ import React from 'react'
 
 function FirstCard() {
     return (
-        <div className='w-220 h-200 bg-dark-green p-8 rounded-large mt-[50px]'>
+        <div className='w-[250px] md:w-[250pxvw] h-[250pxvw] bg-dark-green p-8 rounded-large mt-[50px]'>
             <div className='flex items-start text-center text-white'>Upgrade to Pro</div>
             <div className='mt-6  text-white'>
                 <p className='text-xl'>$4.20/ <span className='text-sm'>Month</span> </p>
