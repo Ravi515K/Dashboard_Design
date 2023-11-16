@@ -23,7 +23,7 @@ function Home() {
       <div className="w-full flex">
         <div className="w-1/4 fixed top-[20px] md:w-[20%vw] md:z-50 left-0 h-full">
           <div className="hidden lg:block md:block">
-            <Sidebar className="h-200" />
+            <Sidebar index={0} className="h-200" />
           </div>
           <div className="hidden lg:block md:block">
             <Profile />
