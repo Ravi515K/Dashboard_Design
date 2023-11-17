@@ -11,6 +11,7 @@ import TeamMember from "./RightSection/TeamMember";
 import Message from "./RightSection/Message";
 import Modal from "./components/Modal";
 import { useSelector } from "react-redux";
+import Sidebar1 from "./LeftSection/sidebar1";
 function Home() {
   // const show=useSelector(state=>state.AddMember.isModal)
   const { isModal } = useSelector((state) => state.AddMember);

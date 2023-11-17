@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Sidebar from "../LeftSection/sidebar";
 import Profile from "../LeftSection/Profile";
 import "../App.css";
+import Pagination from "./Pagination";
+
 const getUsers = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
   const result = await response.json();
@@ -10,13 +12,23 @@ const getUsers = async () => {
   return result;
 };
 function Users() {
+  const [usersPerPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading, isError } = useQuery({
     querykey: ["user"],
     queryFn: getUsers,
     staleTime: 30000,
   });
 
-  // console.log(data);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+   const currentUsers = data?.slice(indexOfFirstUser, indexOfLastUser);
+ // console.log(data);
+  const paginate = (Pagnum) => {
+    // console.log(Pagnum)
+    setCurrentPage(prev=>prev+Pagnum);
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center">
@@ -25,7 +37,7 @@ function Users() {
     );
   }
   if (isError) {
-    return <p>{isError.message}</p>;
+    return <p>{"Dat is not found"}</p>;
   }
   return (
     <div className="flex justify-center w-fit h-fit p-0 m-0 border border-black">
@@ -33,7 +45,7 @@ function Users() {
         <Sidebar index={3} />
         <Profile />
       </div>
-      <div>
+      <div className="relative border border-black">
         <h2 className="text-center font-semibold bg-blue py-6">User List</h2>
 
         <div className="flex flex-col text-center">
@@ -49,8 +61,8 @@ function Users() {
           </div>
 
           <div className="">
-            {data &&
-              data.map((user) => (
+            {currentUsers &&
+              currentUsers.map((user) => (
                 <div
                   key={user.id}
                   className="flex bg-middle-bg text-[13px] sm:text-[12px] md:text-[15px] lg:text-[12px] border border-b-2"
@@ -69,6 +81,9 @@ function Users() {
                 </div>
               ))}
           </div>
+        </div>
+        <div className="bottom-0">
+          <Pagination currentPage={currentPage} paginate={paginate} totalUsers={data.length} />
         </div>
       </div>
     </div>
