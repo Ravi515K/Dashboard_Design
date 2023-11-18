@@ -41,16 +41,16 @@ function Users() {
   }
   return (
     <div className="flex justify-center w-fit h-fit p-0 m-0 border border-black">
-      <div>
+      <div >
         <Sidebar index={3} />
         <Profile />
       </div>
       <div className="relative border border-black">
         <h2 className="text-center font-semibold bg-blue py-6">User List</h2>
 
-        <div className="flex flex-col text-center">
-          <div className="flex bg-light-green border">
-            <div className="w-[5vw]">ID</div>
+        <div className="text-center">
+          <div className="flex bg-light-green border sm:text-[10px] md:text-[13px] lg:text-[18px]">
+            <div className="w-[5vw] ">ID</div>
             <div className="w-[12vw]">User Name</div>
             <div className="w-[12vw]">Email</div>
             <div className="w-[16vw]">Address</div>
@@ -65,13 +65,13 @@ function Users() {
               currentUsers.map((user) => (
                 <div
                   key={user.id}
-                  className="flex bg-middle-bg text-[13px] sm:text-[12px] md:text-[15px] lg:text-[12px] border border-b-2"
+                  className="flex bg-middle-bg text-[13px] sm:text-[10px] md:text-[13px] lg:text-[18px] border border-b-2"
                 >
                   <div className=" h-[20px] w-[5vw] p-2">{user.id}</div>
                   <div className="w-[12vw] p-2">{user.name}</div>
                   <div className="w-[12vw] p-2">{user.email}</div>
                   <div className="w-[16vw] p-2">
-                    {user.address.street},{user.address.suite},{" "}
+                    {user.address.street},{user.address.suite},
                     {user.address.city},{user.address.zipcode}
                   </div>
                   <div className="w-[10vw] p-2">{user.phone}</div>

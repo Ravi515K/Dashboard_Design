@@ -1,33 +1,3 @@
-// import React from 'react'
-// import { BiSolidDashboard } from 'react-icons/bi'
-// import { FaChartBar, FaMoneyBill, FaUsers, FaFileAlt, FaCog } from 'react-icons/fa';
-// import { AiOutlineNumber} from 'react-icons/ai'
-// function Sidebar() {
-//     return (
-//         <div>
-//             <div className='flex lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A p-4'>
-//                 <div className='mr-4 mt-2'>
-//                     <AiOutlineNumber />
-//                 </div>
-//                 <div>
-//                     <h1 className='text-xl font-bold'>Niond</h1>
-//                 </div>
-//             </div>
-//             <div className="lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A p-4">
-//                 <ul className="ul-sidebar">
-//                     <li className="flex items-center  bg-light-green rounded-lg  py-2 my-2"><BiSolidDashboard className="mr-4 ml-2" /> Dashboard</li>
-//                     <li className="flex items-center my-2"><FaChartBar className="mr-4 ml-2" /> Statistics</li>
-//                     <li className="flex items-center my-2"><FaMoneyBill className="mr-4 ml-2" /> Transaction</li>
-//                     <li className="flex items-center my-2"><FaUsers className="mr-4 ml-2" /> My Team</li>
-//                     <li className="flex items-center my-2"><FaFileAlt className="mr-4 ml-2" /> Cell Reports</li>
-//                     <li className="flex items-center my-2"><FaCog className="mr-4 ml-2" /> Settings</li>
-//                 </ul>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Sidebar
 
 import React, { useState } from "react";
 import { BiSolidDashboard } from "react-icons/bi";
@@ -38,13 +8,16 @@ import {
   FaFileAlt,
   FaCog,
 } from "react-icons/fa";
+
 import { AiOutlineNumber } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
+import Menu from "../components/Menu";
+
 function Sidebar({ index }) {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(index);
+ 
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -58,9 +31,9 @@ function Sidebar({ index }) {
     navigate("/");
   };
 
-  const handleUser = () => {
-    navigate("/users");
-  };
+  // const handleUser = () => {
+  //   navigate("/users");
+  // };
 
   return (
     <div className="lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A px-4 mt-[-15px]">
@@ -83,29 +56,21 @@ function Sidebar({ index }) {
             </div>
           </div>
           <ul className="ul-sidebar">
-            <li
-              draggable
-              onDragStart={() => handleDragStart(0)}
-              onDragOver={() => handleDragOver(0)}
-              onDrop={handleDrop}
+            <Menu index={index}/>
+             {/* <li
               className={`flex items-center  rounded-lg py-2 my-2 ${
                 activeIndex === 0 ? "bg-light-green" : ""
               }`}
-              onClick={() => handleItemClick(0)}
+           
             >
               <BiSolidDashboard className="mr-4 ml-2" /> Dashboard
             </li>
-            <li     draggable
-                    onDragStart={() => handleDragStart(1)}
-                    onDragOver={() => handleDragOver(1)}
-                    onDrop={handleDrop}
+            <li     
              className="flex items-center py-2 my-2">
               <FaChartBar className="mr-4 ml-2" /> Statistics
             </li>
-            <li draggable
-                onDragStart={() => handleDragStart(2)}
-                onDragOver={() => handleDragOver(2)}
-                onDrop={handleDrop}
+            <li 
+          
             className="flex items-center py-2 my-2">
               <FaMoneyBill className="mr-4 ml-2" /> Transaction
             </li>
@@ -116,27 +81,18 @@ function Sidebar({ index }) {
               onClick={() => {
                 handleUser();
               }}
-                draggable
-                onDragStart={() => handleDragStart(3)}
-                onDragOver={() => handleDragOver(3)}
-                onDrop={handleDrop}
+                
             >
               <FaUsers  className="mr-4 ml-2" /> Users
             </li>
-            <li draggable
-                onDragStart={() => handleDragStart(4)}
-                onDragOver={() => handleDragOver(4)}
-                onDrop={handleDrop}
+            <li 
                     className="flex items-center py-2 my-2">
               <FaFileAlt className="mr-4 ml-2" /> Cell Reports
             </li>
-            <li draggable
-                onDragStart={() => handleDragStart(5)}
-                onDragOver={() => handleDragOver(5)}
-                onDrop={handleDrop}
+            <li 
                 className="flex items-center py-2 my-2">
               <FaCog className="mr-4 ml-2" /> Settings
-            </li>
+            </li>  */}
           </ul>
         </div>
       ) : (
