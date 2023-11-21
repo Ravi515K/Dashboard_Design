@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {RxCross1} from 'react-icons/rx'
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, memberData, singleMemberData } from '../Redux/Slices/AddMember/AddMember';
+import SubmitButton from './SubmitButton';
 function Modal() {
     const dispatch = useDispatch()
     const show = useSelector((state)=> state.AddMember.isModal)
@@ -154,6 +155,7 @@ function Modal() {
                     >
                         Submit
                     </button>
+                    {/* <SubmitButton /> */}
                 </div>
             </form>
         </div>

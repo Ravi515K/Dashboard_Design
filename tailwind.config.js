@@ -17,7 +17,8 @@ export default {
          'sky':'#A9C9FC',
          'middle-bg':'#DBDCDE',
          'white':'#FFFFFF',
-         'red':'#A21717'
+         'red':'#A21717',
+         'blue-200':'#0F658D'
       },
      
       height: {
