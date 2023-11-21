@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import Sidebar from "../LeftSection/sidebar";
 import Profile from "../LeftSection/Profile";
 import "../App.css";
 import Pagination from "./Pagination";
 import Tabs from "./Tabs";
+import Sidebar from "../LeftSection/Sidebar";
 
 const getUsers = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");

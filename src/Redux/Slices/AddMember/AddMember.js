@@ -30,11 +30,14 @@ export const AddMemberSlice = createSlice({
 
       state.exceptData = state.data.filter((el) => el.id !== targetId);
     },
+    GetData:(state,action)=>{
+      state.data=action.payload
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { openModal, closeModal, memberData, singleMemberData } =
+export const { openModal, closeModal, memberData, singleMemberData, GetData } =
   AddMemberSlice.actions;
 
 export default AddMemberSlice.reducer;

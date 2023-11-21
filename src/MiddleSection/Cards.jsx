@@ -9,7 +9,7 @@ function Cards() {
   ]
   return (
     <div className=''>
-      <div className='sm:text-center md:text-left w-2/4 md:w-[100%]  fixed top-0 p-[20px] bg-white z-40'>
+      <div className='sm:text-center md:text-left w-2/4 md:w-[100%] -ml-[15px]  fixed top-0 p-[20px] bg-white z-40'>
         <h1 className='text-xl font-bold'>Dashboard</h1>
         <p className='text-brown text-sm'>4th August 2023</p>
       </div>

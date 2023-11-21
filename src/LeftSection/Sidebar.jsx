@@ -1,6 +1,7 @@
-
 import React, { useState } from "react";
 import { BiSolidDashboard } from "react-icons/bi";
+import { Disclosure } from "@headlessui/react";
+import { FaAngleDown } from "react-icons/fa";
 import {
   FaChartBar,
   FaMoneyBill,
@@ -17,7 +18,6 @@ import Menu from "../components/Menu";
 function Sidebar({ index }) {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
- 
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -55,45 +55,25 @@ function Sidebar({ index }) {
               <h1 className="text-xl font-bold">Niond</h1>
             </div>
           </div>
-          <ul className="ul-sidebar">
-            <Menu index={index}/>
-             {/* <li
-              className={`flex items-center  rounded-lg py-2 my-2 ${
-                activeIndex === 0 ? "bg-light-green" : ""
-              }`}
-           
-            >
-              <BiSolidDashboard className="mr-4 ml-2" /> Dashboard
-            </li>
-            <li     
-             className="flex items-center py-2 my-2">
-              <FaChartBar className="mr-4 ml-2" /> Statistics
-            </li>
-            <li 
-          
-            className="flex items-center py-2 my-2">
-              <FaMoneyBill className="mr-4 ml-2" /> Transaction
-            </li>
-            <li
-              className={`flex items-center rounded-lg py-2 my-2 cursor-pointer ${
-                activeIndex === 3 ? "bg-light-green" : ""
-              }`}
-              onClick={() => {
-                handleUser();
-              }}
-                
-            >
-              <FaUsers  className="mr-4 ml-2" /> Users
-            </li>
-            <li 
-                    className="flex items-center py-2 my-2">
-              <FaFileAlt className="mr-4 ml-2" /> Cell Reports
-            </li>
-            <li 
-                className="flex items-center py-2 my-2">
-              <FaCog className="mr-4 ml-2" /> Settings
-            </li>  */}
-          </ul>
+          <div>
+            <Disclosure>
+            {({ open }) => (
+            <>
+              <Disclosure.Button className="w-[200px] py-2 flex justify-between font-bold rounded-md border bg-blue-200 p-2 border-black">
+                Menu
+                <span className="mt-1"><FaAngleDown  className={`${
+                    open ? 'rotate-180 transform' : ''
+                  } h-5 w-5`}/></span>
+              </Disclosure.Button>
+              <Disclosure.Panel className="text-gray-500">
+                <ul className="ul-sidebar">
+                  <Menu index={index} />
+                </ul>
+              </Disclosure.Panel>
+              </>
+               )}
+            </Disclosure>
+          </div>
         </div>
       ) : (
         <div

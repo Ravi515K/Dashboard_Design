@@ -6,13 +6,7 @@ import {openModal } from '../Redux/Slices/AddMember/AddMember'
 function TeamMember() {
     const dispatch = useDispatch()
     const Data=useSelector(state=>state.AddMember.data)
-     console.log(Data)
-    // const data = [
-    //     {name:'Mahid Ahmed',role:'Product Manager', url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb5q9zsbXW01zLBnO9G6kzKSXKfoDbfqHQfxuNznq_&s'},
-    //     {name:'Daqnif kari',role:'Developer', url:'https://www.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg'},
-    //     {name:'Alina michel',role:'Co-ordinator', url:'https://media.istockphoto.com/id/167288271/photo/serious-young-woman-with-arms-crossed.jpg?s=612x612&w=0&k=20&c=9ji0oEfhSexSpqRbrqiZT6Wubkbzcyn_yEHOedZ7ijw='},
-    //     {name:'Salina Mistao',role:'Product Manager', url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb5q9zsbXW01zLBnO9G6kzKSXKfoDbfqHQfxuNznq_&s'},
-    // ]
+   
     const handleModal = () => {
            dispatch(openModal())
     }

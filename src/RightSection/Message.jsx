@@ -1,8 +1,9 @@
 import React from 'react'
 import { AiFillMessage, AiFillBell } from 'react-icons/ai'
+
 function Message() {
     return (
-            <div className='flex md:h-[50px]'>
+            <div className='flex md:h-fit'>
                 <div className='flex w-50 h-50 border-solid border-2 border-#D4D6D7 rounded-lg justify-center items-center mr-2'><AiFillMessage /></div>
                 <div className='flex w-50 h-50 border-solid border-2 border-#D4D6D7 rounded-lg justify-center items-center mr-2'><AiFillBell /></div>
                 <div className='flex  justify-between'>
@@ -14,6 +15,7 @@ function Message() {
                         <p className='text-sm text-brown'>Sales Manager</p>
                     </div>
                 </div>
+               
             </div>
     
     )
