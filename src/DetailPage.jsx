@@ -1,5 +1,5 @@
 
-import Sidebar from "./LeftSection/sidebar";
+import Sidebar from "./LeftSection/Sidebar";
 import Profile from "./LeftSection/Profile";
 import TeamMember from "./RightSection/TeamMember";
 import React, { useEffect, useState } from 'react'
@@ -9,7 +9,12 @@ import { openModal } from "./Redux/Slices/AddMember/AddMember";
 import Modal from "./components/Modal";
 
 function DetailPage() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { data} = useQuery({
+    queryKey: ["member"],
+    queryFn: getMember,
+    staleTime: 10000,
+  });
   const { isModal } = useSelector((state) => state.AddMember);
   const Data = useSelector(state => state.AddMember.exceptData)
   const obj = useSelector((state) => state.AddMember.singleData);
@@ -45,7 +50,7 @@ function DetailPage() {
           <div class="text-center px-3 pt-2">
             <h3 class="text-black text-sm bold font-sans font-semibold uppercase ">{obj.name}</h3>
             <p class="mt-2 font-sans font-light text-black">
-              Hello, I'm from <span className="font-semibold">{obj.role}</span> background!
+              Hello, I'm from Software background!
             </p>
           </div>
 
