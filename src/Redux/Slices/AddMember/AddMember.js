@@ -6,6 +6,8 @@ const initialState = {
   singleData: {},
   data: [],
   isModal: false,
+  isEdit:false,
+  delete_Id:1
 };
 // console.log(initialState.data)
 export const AddMemberSlice = createSlice({
@@ -17,6 +19,13 @@ export const AddMemberSlice = createSlice({
     },
     closeModal: (state) => {
       state.isModal = false;
+    },
+    openEditModal:(state,action ) => {
+      state.isEdit = true
+      state.delete_Id = action.payload
+    },
+    closeEditModal:(state ) => {
+      state.isEdit = false
     },
     addData: (state, action) => {
       console.log(action.payload)
@@ -41,7 +50,7 @@ export const AddMemberSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { openModal, closeModal, addData, singleMemberData, GetData } =
+export const { openModal, closeModal, addData, singleMemberData, GetData, closeEditModal, openEditModal } =
   AddMemberSlice.actions;
 
 export default AddMemberSlice.reducer;

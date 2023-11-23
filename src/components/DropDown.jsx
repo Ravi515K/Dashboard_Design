@@ -4,9 +4,12 @@ import { Fragment} from 'react'
 import { FaAngleDown } from "react-icons/fa";
 import {EditActiveIcon, EditInactiveIcon, DeleteActiveIcon, DeleteInactiveIcon} from './MenuOpton/Icon'
 import { useMutation } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
+import { openEditModal } from '../Redux/Slices/AddMember/AddMember';
 
 
 export default function DropDown({id}) {
+    const dispatch = useDispatch()
     const deleteMember = (id) => {
         try{
               fetch(`https://gorest.co.in/public/v2/users/${id}`,{
@@ -28,6 +31,11 @@ export default function DropDown({id}) {
 
    const handleDelete = (id) => {
       mutation.mutate(id)
+   }
+
+   const openEdit = (id) => {
+   // console.log('hii')
+        dispatch(openEditModal(id))
    }
   return (
     <div className="">
@@ -56,9 +64,9 @@ export default function DropDown({id}) {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                      active ? 'bg-violet-500' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    
+                    onClick={()=>openEdit(id)}
                   >
                     {active ? (
                       <EditActiveIcon
@@ -149,7 +157,7 @@ export default function DropDown({id}) {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                      active ? 'bg-violet-500' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={()=>handleDelete(id)}
                   >

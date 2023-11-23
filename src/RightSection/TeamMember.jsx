@@ -33,7 +33,7 @@ function TeamMember() {
   });
  
 
-  console.log(data);
+ // console.log(data);
 
   //   let Data = useSelector((state) => state.AddMember.data);
   //console.log(Data)

@@ -11,9 +11,10 @@ import TeamMember from "./RightSection/TeamMember";
 import Message from "./RightSection/Message";
 import Modal from "./components/Modal";
 import { useSelector } from "react-redux";
+import EditModal from "./components/EditModal";
 function Home() {
   // const show=useSelector(state=>state.AddMember.isModal)
-  const { isModal } = useSelector((state) => state.AddMember);
+  const { isModal, isEdit } = useSelector((state) => state.AddMember);
   //  const Data=useSelector(state=>state.AddMember.data)
   //  console.log(Data[0])
  //  console.log(isModal)
@@ -73,6 +74,7 @@ function Home() {
         </div>
       </div>
       {isModal ? <Modal /> : null}
+      {isEdit ? <EditModal /> : null}
     </div>
   );
 }
