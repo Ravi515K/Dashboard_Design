@@ -7,14 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import SingleMember from "./components/SingleMember";
 import { openModal } from "./Redux/Slices/AddMember/AddMember";
 import Modal from "./components/Modal";
+import { useQuery } from "@tanstack/react-query";
 
-function DetailPage() {
-  const dispatch = useDispatch();
-  const { data} = useQuery({
-    queryKey: ["member"],
-    queryFn: getMember,
-    staleTime: 10000,
-  });
+ function DetailPage() {
+
   const { isModal } = useSelector((state) => state.AddMember);
   const Data = useSelector(state => state.AddMember.exceptData)
   const obj = useSelector((state) => state.AddMember.singleData);

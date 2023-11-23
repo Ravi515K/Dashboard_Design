@@ -32,7 +32,7 @@ function SingleMember({name ,gender , id}) {
                 <p className='text-[9px] text-[#7C7B7C]'>{gender}</p>
             </div>
             </div>
-            <div  className=' mr-2 mt-2 cursor-pointer' ><DropDown /></div>
+            <div  className=' mr-2 mt-2 cursor-pointer' ><DropDown id={id}/></div>
         </div>
     )
 }

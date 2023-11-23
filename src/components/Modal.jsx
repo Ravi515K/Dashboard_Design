@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  closeModal,
-  addData,
-  singleMemberData,
-} from "../Redux/Slices/AddMember/AddMember";
-import SubmitButton from "./SubmitButton";
+import { closeModal, addData } from "../Redux/Slices/AddMember/AddMember";
+import { useMutation } from "@tanstack/react-query";
 function Modal() {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.AddMember.isModal);
@@ -25,17 +21,17 @@ function Modal() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-  if (e.target.type === 'radio') {
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  } else {
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  }
+    if (e.target.type === "radio") {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   //   const handleImageUpload = (e) => {
@@ -59,25 +55,34 @@ function Modal() {
   //         });
   //     }
   // };
- 
-  const PostData = async() => {
-   // console.log('hiii')
-   const res =await fetch('https://gorest.co.in/public/v2/users',{
-        method:'POST',
-        headers:{
-            "Content-Type": "application/json",
-            "Authorization": "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e"
-          },
-          body: JSON.stringify(formData)
-       })
 
-       const data =await res.json()
-      // console.log(data)
-       return data
-      
-  }
+  const postData = async (formData) => {
+   // console.log(body);
+    // console.log('hiii')
+    const res = await fetch("https://gorest.co.in/public/v2/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization":
+          "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+    // console.log(data)
+    return data;
+  };
+
+  const mutation = useMutation({
+    mutationFn: (formData) => {
+      return postData(formData);
+    },
+  });
+
+ 
   const handleSubmit = (e) => {
-   // console.log("1")
+    // console.log("1")
     e.preventDefault();
     const validationErrors = {};
 
@@ -85,7 +90,7 @@ function Modal() {
     // if (!formData.imgUrl) {
     //   validationErrors.imgUrl = "Image URL is required";
     // }
-   // console.log("2")
+    // console.log("2")
     // Validate the name
     if (!formData.name) {
       validationErrors.name = "Name is required";
@@ -102,18 +107,15 @@ function Modal() {
 
     if (Object.keys(validationErrors).length === 0) {
       // Form is valid, you can submit the data or perform other actions
-      console.log("4")
-    //   dispatch(memberData(formData));
-    console.log(formData)
-      
-    
-      
-       PostData()
-        dispatch(addData(formData))
-       dispatch(closeModal());
+      console.log("4");
+      //   dispatch(memberData(formData));
+     
+      mutation.mutate(formData);
+      dispatch(addData(formData));
+      dispatch(closeModal());
       //  dispatch(singleMemberData(formData.id))
       alert("Added Member Successfully");
-     // console.log("Form is valid. Data:", formData);
+      // console.log("Form is valid. Data:", formData);
     } else {
       // Update the errors state
       setErrors(validationErrors);
@@ -161,7 +163,7 @@ function Modal() {
             <p className="text-red-500 text-xs italic">{errors.name}</p>
           )}
         </div>
-      
+
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -193,7 +195,7 @@ function Modal() {
                 id="male"
                 name="gender"
                 class="mr-2"
-                value={'male'}
+                value={"male"}
                 onChange={handleInputChange}
                 required
               />
@@ -205,7 +207,7 @@ function Modal() {
                 type="radio"
                 id="female"
                 name="gender"
-                value={'female'}
+                value={"female"}
                 class="mr-2"
                 onChange={handleInputChange}
                 required

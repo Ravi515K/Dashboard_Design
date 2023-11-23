@@ -3,9 +3,32 @@ import { Fragment} from 'react'
 // import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { FaAngleDown } from "react-icons/fa";
 import {EditActiveIcon, EditInactiveIcon, DeleteActiveIcon, DeleteInactiveIcon} from './MenuOpton/Icon'
+import { useMutation } from '@tanstack/react-query';
 
 
-export default function DropDown() {
+export default function DropDown({id}) {
+    const deleteMember = (id) => {
+        try{
+              fetch(`https://gorest.co.in/public/v2/users/${id}`,{
+                method:'DELETE',
+                headers:{
+                  'Content-Type':'application/json',
+                  'Authorization':'Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e'
+                }
+              })
+        }catch{(err)=>
+          console.log(err)
+        }
+    }
+   const mutation = useMutation({
+    mutationFn: (id)=>{
+      return deleteMember(id)
+  }
+   })
+
+   const handleDelete = (id) => {
+      mutation.mutate(id)
+   }
   return (
     <div className="">
       <Menu as="div" className=" inline-block text-left">
@@ -35,6 +58,7 @@ export default function DropDown() {
                     className={`${
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    
                   >
                     {active ? (
                       <EditActiveIcon
@@ -127,6 +151,7 @@ export default function DropDown() {
                     className={`${
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    onClick={()=>handleDelete(id)}
                   >
                     {active ? (
                       <DeleteActiveIcon

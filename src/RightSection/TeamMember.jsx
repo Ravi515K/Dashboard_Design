@@ -14,12 +14,11 @@ function TeamMember() {
                 method: "GET",
                 headers: {
                   "Content-Type": "application/json",
-                  'Authorization':
-                    "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
+                  'Authorization':"Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
                 }
               })
             let   result =await res.json()
-          //  console.log(result)
+            console.log(result)
               dispatch(GetData(result))
             return result
          }catch{(err)=>console.log(err)}
@@ -34,7 +33,7 @@ function TeamMember() {
   });
  
 
- // console.log(data);
+  console.log(data);
 
   //   let Data = useSelector((state) => state.AddMember.data);
   //console.log(Data)
