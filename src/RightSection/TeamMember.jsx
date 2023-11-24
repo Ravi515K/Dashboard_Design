@@ -18,7 +18,7 @@ function TeamMember() {
                 }
               })
             let   result =await res.json()
-            console.log(result)
+           // console.log(result)
               dispatch(GetData(result))
             return result
          }catch{(err)=>console.log(err)}

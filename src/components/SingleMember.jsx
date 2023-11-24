@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { singleMemberData } from '../Redux/Slices/AddMember/AddMember'
 import DropDown from './DropDown'
-function SingleMember({name ,gender , id}) {
-  //  console.log(id)
+
+function SingleMember({name ,gender , id, detailId}) {
+   
+  // console.log(id, singleId)
  
     const dispatch=useDispatch()
     const navigate = useNavigate()
     
     const goToDetailPage = (id) =>{
        // console.log(id)
-            dispatch(singleMemberData(id))
-            navigate('/detail')
+         //   dispatch(singleMemberData(id))
+            navigate(`/detail/${id}`)
     }
 
   
@@ -32,7 +34,9 @@ function SingleMember({name ,gender , id}) {
                 <p className='text-[9px] text-[#7C7B7C]'>{gender}</p>
             </div>
             </div>
-            <div  className=' mr-2 mt-2 cursor-pointer' ><DropDown id={id}/></div>
+            <div  className=' mr-2 mt-2 cursor-pointer' ><DropDown id1={id} detailId={detailId}/></div>
+        
+           
         </div>
     )
 }

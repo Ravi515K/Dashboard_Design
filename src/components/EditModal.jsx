@@ -6,18 +6,20 @@ import {
   addData,
   closeEditModal,
 } from "../Redux/Slices/AddMember/AddMember";
-import { useMutation } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 function EditModal() {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const id = useSelector((state) => state.AddMember.delete_Id);
 
-   console.log(id)
+ // console.log(id)
   const [formData, setFormData] = useState({
-    id: new Date().getTime(),
-    // imgFile: null,
-    // imgUrl: "",
-    name: "",
+    id: id,
     email: "",
     gender: "",
     status: "inactive",
@@ -62,31 +64,34 @@ function EditModal() {
   //     }
   // };
 
-  const editData = async (formData, id) => {
-  
-    
-    const res = await fetch(`https://gorest.co.in/public/v2/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
-      },
-      body: JSON.stringify(formData),
-    });
+  const editData = async (formData) => {
+    const res = await fetch(
+      `https://gorest.co.in/public/v2/users/${formData.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
 
     const data = await res.json();
     // console.log(data)
     return data;
   };
-
+  
   const mutation = useMutation({
-    mutationFn: (formData, id) => {
-      //  console.log(id)
-      return editData(formData, id);
+    mutationFn: (formData) => {
+      return editData(formData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["member"] });
     },
   });
-
+  // console.log(mutation)
   const handleSubmit = (e) => {
     // console.log("id",id,formData)
     e.preventDefault();
@@ -113,10 +118,10 @@ function EditModal() {
 
     if (Object.keys(validationErrors).length === 0) {
       // Form is valid, you can submit the data or perform other actions
-      console.log("4");
+     
       //   dispatch(memberData(formData));
 
-      mutation.mutate(formData, id);
+      mutation.mutate(formData);
       dispatch(addData(formData));
       dispatch(closeEditModal());
       //  dispatch(singleMemberData(formData.id))

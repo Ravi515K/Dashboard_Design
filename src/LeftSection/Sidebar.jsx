@@ -14,8 +14,10 @@ import { AiOutlineNumber } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import Menu from "../components/Menu";
+import { useSelector } from "react-redux";
 
 function Sidebar({ index }) {
+  const {isModal} = useSelector((state)=>state.AddMember.isModal)
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -31,9 +33,7 @@ function Sidebar({ index }) {
     navigate("/");
   };
 
-  // const handleUser = () => {
-  //   navigate("/users");
-  // };
+ 
 
   return (
     <div className="lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A px-4 mt-[-15px]">
@@ -43,7 +43,7 @@ function Sidebar({ index }) {
         </button>
       </div>
       {!showMenu ? (
-        <div className="hidden lg:block lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A p-4 ">
+        <div className="hidden lg:block lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A p-4">
           <div
             className="flex lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A mb-[55px] cursor-pointer"
             onClick={goToHome}

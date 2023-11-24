@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, addData } from "../Redux/Slices/AddMember/AddMember";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 function Modal() {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient()
   const show = useSelector((state) => state.AddMember.isModal);
   // console.log(show)
   const [formData, setFormData] = useState({
@@ -57,8 +58,7 @@ function Modal() {
   // };
 
   const postData = async (formData) => {
-   // console.log(body);
-    // console.log('hiii')
+   
     const res = await fetch("https://gorest.co.in/public/v2/users", {
       method: "POST",
       headers: {
@@ -78,11 +78,14 @@ function Modal() {
     mutationFn: (formData) => {
       return postData(formData);
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["member"] });
+    },
   });
 
  
   const handleSubmit = (e) => {
-    // console.log("1")
+    
     e.preventDefault();
     const validationErrors = {};
 
@@ -90,34 +93,31 @@ function Modal() {
     // if (!formData.imgUrl) {
     //   validationErrors.imgUrl = "Image URL is required";
     // }
-    // console.log("2")
-    // Validate the name
+ 
+   
     if (!formData.name) {
       validationErrors.name = "Name is required";
     }
 
-    // Validate the role
+    
     if (!formData.gender) {
       validationErrors.gender = "Gender is required";
     }
-    // console.log("3")
+    
     if (!formData.email) {
       validationErrors.email = "email is required";
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      // Form is valid, you can submit the data or perform other actions
-      console.log("4");
-      //   dispatch(memberData(formData));
-     
+
       mutation.mutate(formData);
       dispatch(addData(formData));
       dispatch(closeModal());
-      //  dispatch(singleMemberData(formData.id))
+
       alert("Added Member Successfully");
-      // console.log("Form is valid. Data:", formData);
+     
     } else {
-      // Update the errors state
+      
       setErrors(validationErrors);
     }
   };
@@ -242,7 +242,7 @@ function Modal() {
           >
             Submit
           </button>
-          {/* <SubmitButton /> */}
+          
         </div>
       </form>
     </div>
