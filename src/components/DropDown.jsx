@@ -15,8 +15,8 @@ import {
   openEditModal_in,
 } from "../Redux/Slices/AddMember/AddMember";
 
-export default function DropDown({ id1, detailId }) {
- // console.log(id1)
+export default function DropDown({ id1,singleEdit }) {
+//  console.log(id1)
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const deleteMember = (id1) => {
@@ -46,12 +46,13 @@ export default function DropDown({ id1, detailId }) {
     mutation.mutate(id1);
   };
 
-  const openEdit = (id1, detailId) => {
-    // console.log(id1,singleId)
-    if (id1) {
+  const openEdit = (id1,singleEdit) => {
+    // console.log(id1,singleEdit)
+    if (id1 && singleEdit) {
+      dispatch(openEditModal_in(id1))
+    }else{
+     
       dispatch(openEditModal(id1));
-    } else if (singleId) {
-      dispatch(openEditModal_in(detailId));
     }
   };
   return (
@@ -82,7 +83,7 @@ export default function DropDown({ id1, detailId }) {
                     className={`${
                       active ? "bg-violet-500" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => openEdit(id1, detailId)}
+                    onClick={() => openEdit(id1, singleEdit)}
                   >
                     {active ? (
                       <EditActiveIcon

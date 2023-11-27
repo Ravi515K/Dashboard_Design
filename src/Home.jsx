@@ -10,14 +10,43 @@ import Meeting from "./RightSection/Meeting";
 import TeamMember from "./RightSection/TeamMember";
 import Message from "./RightSection/Message";
 import Modal from "./components/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditModal from "./components/EditModal";
+import { useQuery } from "@tanstack/react-query";
 function Home() {
+ 
   // const show=useSelector(state=>state.AddMember.isModal)
   const { isModal, isEdit } = useSelector((state) => state.AddMember);
   //  const Data=useSelector(state=>state.AddMember.data)
   //  console.log(Data[0])
- //  console.log(isModal)
+  // console.log(isEdit)
+
+
+
+ const getMember = async () => {
+  try {
+    const res = await fetch("https://gorest.co.in/public/v2/users", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
+      },
+    });
+    let result = await res.json();
+    // console.log(result)
+    dispatch(GetData(result));
+    return result;
+  } catch {
+    (err) => console.log(err);
+  }
+};
+
+const { data } = useQuery({
+  queryKey: ["member"],
+  queryFn: getMember,
+  staleTime: 10000,
+});
 
   return (
     <div className="sm-text-sm md:text-md">

@@ -5,7 +5,7 @@ function SingleCard({data}) {
     // console.log(clr)
   return (
     
-      <div className={`${clr}  w-[200pxvw] h-[200pxvh] p-2 rounded-lg`}>
+      <div className={`${clr}  w-[200px] h-[120px] p-2 rounded-lg`}>
         <ul>
           <li className="flex">
             {icon} {heading}

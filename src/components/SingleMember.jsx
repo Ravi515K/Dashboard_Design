@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import { singleMemberData } from '../Redux/Slices/AddMember/AddMember'
 import DropDown from './DropDown'
 
-function SingleMember({name ,gender , id, detailId}) {
+function SingleMember({name ,gender , id, singleEdit}) {
    
   // console.log(id, singleId)
  
@@ -34,7 +34,7 @@ function SingleMember({name ,gender , id, detailId}) {
                 <p className='text-[9px] text-[#7C7B7C]'>{gender}</p>
             </div>
             </div>
-            <div  className=' mr-2 mt-2 cursor-pointer' ><DropDown id1={id} detailId={detailId}/></div>
+            <div  className=' mr-2 mt-2 cursor-pointer' ><DropDown id1={id} name={name} gender={gender} singleEdit={singleEdit}/></div>
         
            
         </div>

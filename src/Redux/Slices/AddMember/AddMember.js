@@ -42,7 +42,7 @@ export const AddMemberSlice = createSlice({
     },
     
     addData: (state, action) => {
-      console.log(action.payload)
+    //  console.log(action.payload)
       state.data.unshift(action.payload);
     },
     singleMemberData: (state, action) => {

@@ -16,12 +16,14 @@ function EditModal() {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const id = useSelector((state) => state.AddMember.delete_Id);
-
  // console.log(id)
+  const singleData = queryClient.getQueryData(['member'])?.find((el)=>{return el.id==id})
+ // console.log(singleData)
   const [formData, setFormData] = useState({
-    id: id,
-    email: "",
-    gender: "",
+    id: singleData.id,
+    name: singleData.name,
+    email: singleData.email,
+    gender:singleData.gender,
     status: "inactive",
   });
   const [errors, setErrors] = useState({});
@@ -206,7 +208,8 @@ function EditModal() {
                 id="male"
                 name="gender"
                 class="mr-2"
-                value={"male"}
+                value="male"
+                checked={formData.gender === 'male' ? true : false}
                 onChange={handleInputChange}
                 required
               />
@@ -218,7 +221,8 @@ function EditModal() {
                 type="radio"
                 id="female"
                 name="gender"
-                value={"female"}
+                value="female"
+                checked={formData.gender === 'female' ? true : false}
                 class="mr-2"
                 onChange={handleInputChange}
                 required

@@ -109,7 +109,7 @@ function Modal() {
     }
 
     if (Object.keys(validationErrors).length === 0) {
-
+      
       mutation.mutate(formData);
       dispatch(addData(formData));
       dispatch(closeModal());
@@ -196,6 +196,7 @@ function Modal() {
                 name="gender"
                 class="mr-2"
                 value={"male"}
+                
                 onChange={handleInputChange}
                 required
               />
