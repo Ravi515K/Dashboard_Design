@@ -1,6 +1,11 @@
 import React from 'react'
 import {FiLogOut} from 'react-icons/fi'
 function Profile() {
+
+    const handleLogout = () => {
+
+        
+    }
     return (
         <div className='profile mt-[150px] ml-[-30px] hidden lg:block'>
             <div className='flex justify-center'>
@@ -10,7 +15,7 @@ function Profile() {
             <p className='text-10 text-brown flex justify-center'>sales Manager</p>
             <div className='flex mt-10 justify-center'>
                <FiLogOut className='mt-1 '/>
-                <h2 className='font-semibold ml-6'>Log Out</h2>
+                <h2 className='font-semibold ml-6' onClick={handleLogout} >Log Out</h2>
             </div>
         </div>
     )

@@ -8,7 +8,7 @@ function Home() {
         navigate('/login')
       }
       const handleHome = () => {
-        navigate('/home')
+        navigate('/dashboard')
       }
   return (
     <div>
@@ -24,7 +24,7 @@ function Home() {
           </div>
           <div className="w-2/4 flex justify-center  items-center mr-10  p-5 cursor-pointer">
             <h1 className="font-bold text-[22px]" onClick={handleHome}>
-              Home
+              Dashboard
             </h1>
           </div>
           <div className="w-1/4 flex justify-end  items-center mr-10  p-5">

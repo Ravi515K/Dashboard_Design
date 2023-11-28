@@ -9,19 +9,23 @@ import RequiredAuth from "./hoc/RequredRouth";
 import Home from "./Home";
 
 function App() {
- 
   return (
     <div className="my-4 ">
-     
-        <Routes>
+      <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Signup />}></Route>
-          <Route path="/home" element={<RequiredAuth> <Dashboard /></RequiredAuth> }></Route>
-          <Route path="/detail/:id" element={<DetailPage />}></Route>
-          <Route path ="/users" element={<Users />}/>
-        </Routes>
-      
+        <Route
+          path="/dashboard"
+          element={
+            <RequiredAuth>
+              <Dashboard />
+            </RequiredAuth>
+          }
+        ></Route>
+        <Route path="/detail/:id" element={<DetailPage />}></Route>
+        <Route path="/users" element={<Users />} />
+      </Routes>
     </div>
   );
 }

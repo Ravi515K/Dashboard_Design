@@ -1,7 +1,7 @@
 // src/Login.js
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineNumber, AiFillMessage, AiFillBell } from 'react-icons/ai'
+import { AiOutlineNumber } from 'react-icons/ai'
 import axios from "axios";
 
 const Login = () => {
@@ -11,9 +11,6 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    // Implement your login logic here
-   // console.log("Username:", username);
-   // console.log("Password:", password);
 
    axios.post('https://uatapicorporatetravel.fynity.in/api/login', {
   email: email,
@@ -26,14 +23,14 @@ const Login = () => {
   }
 })
   .then((res) => {
-    // Assuming the token is in the response data
-    console.log(res.data.token ,"HII")
+  
+   // console.log(res.data.token ,"HII")
     const token = res.data.token;
 
     if (token) {
       // Save the token to localStorage
       localStorage.setItem('token', token);
-      navigate("/home")
+      navigate("/dashboard")
     }
   })
   .catch((err) => {
@@ -46,8 +43,8 @@ const Login = () => {
 
     navigate('/register')
   }
-  const handleHome = () => {
-    navigate('/home')
+  const handleDashboard = () => {
+    navigate('/dashboard')
   }
   return (
     <div>
@@ -62,7 +59,7 @@ const Login = () => {
                 </div>
             </div>
             <div className="w-2/4 flex justify-center  items-center mr-10  p-5 cursor-pointer">
-               <h1 className="font-bold text-[22px]" onClick={handleHome}> Home</h1>
+               <h1 className="font-bold text-[22px]" onClick={handleDashboard}>Dashboard</h1>
             </div>
             <div className="w-1/4 flex justify-end  items-center mr-10  p-5">
                <h1 className="font-bold text-[22px] cursor-pointer" onClick={handleSignup}> SignUp</h1>
