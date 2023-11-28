@@ -38,7 +38,9 @@ export default function DropDown({ id1,singleEdit }) {
       return deleteMember(id1);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["member"] });
+      setTimeout(()=>{
+        queryClient.invalidateQueries({ queryKey: ["member"] });
+      },500)
     },
   });
 

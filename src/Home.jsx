@@ -1,109 +1,49 @@
-import React, { useState } from "react";
-import TopStore from "./MiddleSection/TopStore";
-import Sidebar from "./LeftSection/Sidebar";
-import Cards from "./MiddleSection/Cards";
-import RegularSell from "./MiddleSection/RegularSell";
-import Analysis from "./MiddleSection/Analysis";
-import Profile from "./LeftSection/Profile";
-import FirstCard from "./RightSection/FirstCard";
-import Meeting from "./RightSection/Meeting";
-import TeamMember from "./RightSection/TeamMember";
-import Message from "./RightSection/Message";
-import Modal from "./components/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import EditModal from "./components/EditModal";
-import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { AiOutlineNumber } from 'react-icons/ai'
+import { useNavigate } from "react-router";
 function Home() {
- 
-  // const show=useSelector(state=>state.AddMember.isModal)
-  const { isModal, isEdit } = useSelector((state) => state.AddMember);
-  //  const Data=useSelector(state=>state.AddMember.data)
-  //  console.log(Data[0])
-  // console.log(isEdit)
+  const navigate = useNavigate()
+    const handleLogin = (e) => {
 
-
-
- const getMember = async () => {
-  try {
-    const res = await fetch("https://gorest.co.in/public/v2/users", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
-      },
-    });
-    let result = await res.json();
-    // console.log(result)
-    dispatch(GetData(result));
-    return result;
-  } catch {
-    (err) => console.log(err);
-  }
-};
-
-const { data } = useQuery({
-  queryKey: ["member"],
-  queryFn: getMember,
-  staleTime: 10000,
-});
-
+        navigate('/login')
+      }
+      const handleHome = () => {
+        navigate('/home')
+      }
   return (
-    <div className="sm-text-sm md:text-md">
-      <div className="w-full flex">
-        <div className="w-1/4 fixed top-[20px] md:w-[20%vw] md:z-50 left-0 h-full">
-          <div className="hidden lg:block md:block">
-            <Sidebar index={0} className="h-200" />
-          </div>
-          <div className="hidden lg:block md:block">
-            <Profile />
-          </div>
-        </div>
-       
-        <div className="lg:w-2/4 md:w-[45%vw] md:px-2 lg:ml-[290px] md:ml-[100px] sm:w-[100%] overflow-auto ">
-          <div className="">
-            <Cards />
-          </div>
-          <div className="grid lg:grid-cols-2 sm:grid-cols-1 sm:text-center gap-5 mt-10 mb-10 justify-between ">
-            <div className="flex sm:justify-center">
-              <RegularSell className="w-1/2" />
+    <div>
+      <div className=" border border-black bg-violet">
+        <div className="flex">
+          <div className="flex w-1/4 ml-10 p-5">
+            <div className="mr-4 mt-2">
+              <AiOutlineNumber />
             </div>
             <div>
-              <Analysis className="w-1/2 ml-12" />
+              <h1 className="text-xl font-bold">Niond</h1>
             </div>
           </div>
-          <div className="p-2">
-            <TopStore />
+          <div className="w-2/4 flex justify-center  items-center mr-10  p-5 cursor-pointer">
+            <h1 className="font-bold text-[22px]" onClick={handleHome}>
+              Home
+            </h1>
           </div>
-
-          <div className="md:hidden">
-            <FirstCard />
-          </div>
-          <div className="md:hidden sm:py-4 sm:ml-[30px]">
-            <Meeting />
-          </div>
-          <div className="md:hidden">
-            <TeamMember />
-          </div>
-        </div>
-       
-        <div className="hidden lg:w-[25%] md:px-2 md:grid justify-center md:w-[35%] ">
-          <div className="fixed w-[100%vw] top-0 p-[20px]  bg-white z-40">
-            <Message />
-          </div>
-          <div className="mt-[40px]">
-            <FirstCard />
-          </div>
-          <div>
-            <Meeting />
-          </div>
-          <div>
-            <TeamMember />
+          <div className="w-1/4 flex justify-end  items-center mr-10  p-5">
+            <h1
+              className="font-bold text-[22px] cursor-pointer"
+              onClick={handleLogin}
+            >
+              LogIn
+            </h1>
           </div>
         </div>
       </div>
-      {isModal ? <Modal /> : null}
-      {isEdit ? <EditModal /> : null}
+      <div className="text-center mt-[50px]">
+      <h1 className="font-bold">This is the <span className="text-[25px]">Home</span>  Page of Travel Insurance Group</h1>
+        <div className="flex justify-center">
+          <img src="https://thumbs.dreamstime.com/b/time-to-travel-wooden-sign-beach-background-49509295.jpg?w=768" alt="" />
+        </div>
+        
+      </div>
     </div>
   );
 }
