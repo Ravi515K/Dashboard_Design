@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { ImCheckboxChecked } from "react-icons/im"
 function CardType({ data }) {
-  let [plan, setPlan] = useState('Leanne Graham')
-  // console.log(data)
+  
   return (
     <RadioGroup>
       <div className="grid grid-cols-4 gap-2 justify-between">

@@ -1,19 +1,18 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-// import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { FaAngleDown } from "react-icons/fa";
-import {
-  EditActiveIcon,
-  EditInactiveIcon,
-  DeleteActiveIcon,
-  DeleteInactiveIcon,
-} from "./MenuOpton/Icon";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { FaAngleDown } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import {
   openEditModal,
   openEditModal_in,
 } from "../Redux/Slices/AddMember/AddMember";
+import {
+  DeleteActiveIcon,
+  DeleteInactiveIcon,
+  EditActiveIcon,
+  EditInactiveIcon,
+} from "./MenuOpton/Icon";
 
 export default function DropDown({ id1,singleEdit }) {
 //  console.log(id1)

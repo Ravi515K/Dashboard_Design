@@ -1,28 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 // import { IoIosArrowForward } from 'react-icons/io'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { singleMemberData } from '../Redux/Slices/AddMember/AddMember'
 import DropDown from './DropDown'
 
 function SingleMember({name ,gender , id, singleEdit}) {
-   
-  // console.log(id, singleId)
- 
-    const dispatch=useDispatch()
     const navigate = useNavigate()
     
     const goToDetailPage = (id) =>{
-       // console.log(id)
-         //   dispatch(singleMemberData(id))
             navigate(`/detail/${id}`)
     }
 
-  
-   
-
-   
-   
     return (
         <div className='flex' index={id}>
             <div className='flex justify-between w-250 py-2 cursor-pointer' onClick={()=>goToDetailPage(id)}>

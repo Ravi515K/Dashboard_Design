@@ -1,17 +1,14 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { useDispatch, useSelector } from "react-redux";
-import { closeModal, addData } from "../Redux/Slices/AddMember/AddMember";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { addData, closeModal } from "../Redux/Slices/AddMember/AddMember";
 function Modal() {
   const dispatch = useDispatch();
   const queryClient = useQueryClient()
-  const show = useSelector((state) => state.AddMember.isModal);
-  // console.log(show)
+  
   const [formData, setFormData] = useState({
     id: new Date().getTime(),
-    // imgFile: null,
-    // imgUrl: "",
     name: "",
     email: "",
     gender: "",
@@ -89,12 +86,6 @@ function Modal() {
     e.preventDefault();
     const validationErrors = {};
 
-    // Validate the imgUrl
-    // if (!formData.imgUrl) {
-    //   validationErrors.imgUrl = "Image URL is required";
-    // }
- 
-   
     if (!formData.name) {
       validationErrors.name = "Name is required";
     }

@@ -1,16 +1,14 @@
+import {
+  useMutation,
+  useQueryClient
+} from "@tanstack/react-query";
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  closeModal,
   addData,
-  closeEditModal,
+  closeEditModal
 } from "../Redux/Slices/AddMember/AddMember";
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
 
 function EditModal() {
   const dispatch = useDispatch();

@@ -7,7 +7,7 @@ import useGetMember from "../customHook/useFetch";
 
 function TeamMember() {
   const dispatch = useDispatch();
-  const {data,cacheData} = useGetMember()
+  const {cacheData} = useGetMember()
  // console.log(data)
  
   const handleModal = () => {

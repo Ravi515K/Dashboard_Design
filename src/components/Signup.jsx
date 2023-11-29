@@ -1,7 +1,7 @@
 // src/Signup.js
 import React, { useState } from 'react';
+import { AiOutlineNumber } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineNumber, AiFillMessage, AiFillBell } from 'react-icons/ai'
 
 const Signup = () => {
   const navigate = useNavigate()

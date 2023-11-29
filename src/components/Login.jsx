@@ -1,70 +1,79 @@
 // src/Login.js
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineNumber } from 'react-icons/ai'
 import axios from "axios";
+import React, { useState } from "react";
+import { AiOutlineNumber } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+ 
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-   axios.post('https://uatapicorporatetravel.fynity.in/api/login', {
-  email: email,
-  password: password,
-  device_name: 'window',
-}, {
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  }
-})
-  .then((res) => {
-  
-   // console.log(res.data.token ,"HII")
-    const token = res.data.token;
+    axios.post("https://uatapicorporatetravel.fynity.in/api/login",
+        {
+          email: email,
+          password: password,
+          device_name: "window",
+        },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res.data.token ,"HII")
+        const token = res.data.token;
 
-    if (token) {
-      // Save the token to localStorage
-      localStorage.setItem('token', token);
-      navigate("/dashboard")
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-      
+        if (token) {
+          // Save the token to localStorage
+          localStorage.setItem("token", token);
+
+          navigate("/dashboard");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const handleSignup = (e) => {
-
-    navigate('/register')
-  }
+    navigate("/register");
+  };
   const handleDashboard = () => {
-    navigate('/dashboard')
-  }
+    navigate("/dashboard");
+  };
   return (
     <div>
       <div className=" border border-black bg-violet">
-      <div className='flex'>
-            <div className='flex w-1/4 ml-10 p-5'>
-                <div className='mr-4 mt-2'>
-                    <AiOutlineNumber />
-                </div>
-                <div>
-                    <h1 className='text-xl font-bold'>Niond</h1>
-                </div>
+        <div className="flex">
+          <div className="flex w-1/4 ml-10 p-5">
+            <div className="mr-4 mt-2">
+              <AiOutlineNumber />
             </div>
-            <div className="w-2/4 flex justify-center  items-center mr-10  p-5 cursor-pointer">
-               <h1 className="font-bold text-[22px]" onClick={handleDashboard}>Dashboard</h1>
+            <div>
+              <h1 className="text-xl font-bold">Niond</h1>
             </div>
-            <div className="w-1/4 flex justify-end  items-center mr-10  p-5">
-               <h1 className="font-bold text-[22px] cursor-pointer" onClick={handleSignup}> SignUp</h1>
-            </div>
-            
+          </div>
+          <div className="w-2/4 flex justify-center  items-center mr-10  p-5 cursor-pointer">
+            <h1 className="font-bold text-[22px]" onClick={handleDashboard}>
+              Dashboard
+            </h1>
+          </div>
+          <div className="w-1/4 flex justify-end  items-center mr-10  p-5">
+            <h1
+              className="font-bold text-[22px] cursor-pointer"
+              onClick={handleSignup}
+            >
+              {" "}
+              SignUp
+            </h1>
+          </div>
         </div>
       </div>
       <div className="grid items-center justify-center h-screen">

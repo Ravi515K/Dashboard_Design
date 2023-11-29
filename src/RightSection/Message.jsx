@@ -1,7 +1,10 @@
 import React from 'react'
 import { AiFillMessage, AiFillBell } from 'react-icons/ai'
+import useGetUser from '../customHook/useGetUser'
 
 function Message() {
+    const {cacheUserData} = useGetUser()
+   // console.log(data)
     return (
             <div className='flex md:h-fit'>
                 <div className='flex w-50 h-50 border-solid border-2 border-#D4D6D7 rounded-lg justify-center items-center mr-2'><AiFillMessage /></div>
@@ -11,8 +14,8 @@ function Message() {
                         <img className='w-50 h-50 rounded-full' src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww' />
                     </div>
                     <div className='text-center grid items-center'>
-                        <h1 className='text-15 font-bold'>Nora Watson</h1>
-                        <p className='text-sm text-brown'>Sales Manager</p>
+                        <h1 className='text-15 font-bold'>{cacheUserData?.name}</h1>
+                        <p className='text-sm text-brown'>{cacheUserData?.email}</p>
                     </div>
                 </div>
                

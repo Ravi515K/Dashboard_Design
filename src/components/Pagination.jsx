@@ -1,8 +1,8 @@
 import React from 'react'
 
 function Pagination({totalUsers, paginate, currentPage}) {
-   
-   const totalPages = Math.ceil(totalUsers/3)
+    
+    const totalPages = Math.ceil(totalUsers/3)
    const arr = []
   // console.log(totalPages)
     for(let i=1;i<=totalPages;i++){

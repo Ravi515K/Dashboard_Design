@@ -1,16 +1,26 @@
-import React from 'react'
-import { Navigate } from 'react-router';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import useGetUser from '../customHook/useGetUser';
 
 
 const RequiredAuth = ({ children }) => {
-    const token = localStorage.getItem("token")
-   // console.log(token)
-    if (!token ){
-        return <Navigate to="/login" />;
+   const navigate = useNavigate()
+   const {service} = useGetUser();
+ 
+   useEffect(()=>{
+    if(service.status=="error"){
+        navigate("/login")
+    }else{
+        navigate("/dashboard")
+    }
+   },[service.status])
+    
+    
+    if(service.isLoading){
+        return <div>Loading</div>
     }
     
-    return children;
-    
+    return <> {children} </>
 }
 
 export default RequiredAuth

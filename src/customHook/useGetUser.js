@@ -1,34 +1,37 @@
-import React from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios'; 
+
 
 function useGetUser() {
-    const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
+  const queryClient = useQueryClient();
 
-    const getUserData = () => {
-        try{
-            axios.get('https://uatapicorporatetravel.fynity.in/api/user',{
-                headers:{
-                    'Accept':"application/json",
-                    "Content-Type":"application/json",
-                    "Authorization":`Bearer ${token}`
-                }
-            }).then((res)=>{
-               // console.log(res)
-                return res.data
-            }).catch((err)=>{
-                console.log(err)
-            })
-        }catch{(err)=>{
-            console.log(err)
-        }}
-    }
+  const getUserData = async () => {
     
-    const { data, isLoading, isFetching } = useQuery({
-        queryKey: ["user"],
-        queryFn: getUserData,
-        staleTime: 10000,
-      })
+    try {
+      const response = await axios.get('https://uatapicorporatetravel.fynity.in/api/user', {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+   
+      return response.data.data;
+    } catch (err) {
+    
+      throw err;
+    }
+  };
 
-    return {data}
+  const service = useQuery({
+    queryKey: ["user"],
+    queryFn: getUserData,
+    staleTime:10000
+  });
+
+  const cacheUserData = queryClient.getQueryData(['user']);
+
+  return {service,cacheUserData };
 }
 
-export default useGetUser
+export default useGetUser;

@@ -2,7 +2,7 @@ import React from "react";
 
 function SingleCard({data}) {
     const {icon,heading,follow, statement,clr} = data
-    // console.log(clr)
+   
   return (
     
       <div className={`${clr}  w-[200px] h-[120px] p-2 rounded-lg`}>

@@ -21,8 +21,6 @@ function Menu({index}) {
     const dragItem = useRef(null)
     const dragOverItem = useRef(null)
     
-   
-
     const handleSort = () =>{
       console.log(dragItem,'dragItem')
       let data = [...arr]
