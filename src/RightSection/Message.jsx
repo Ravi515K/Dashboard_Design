@@ -4,7 +4,7 @@ import useGetUser from '../customHook/useGetUser'
 
 function Message() {
     const {cacheUserData} = useGetUser()
-   // console.log(data)
+ 
     return (
             <div className='flex md:h-fit'>
                 <div className='flex w-50 h-50 border-solid border-2 border-#D4D6D7 rounded-lg justify-center items-center mr-2'><AiFillMessage /></div>

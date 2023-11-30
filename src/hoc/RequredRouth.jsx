@@ -6,18 +6,20 @@ import useGetUser from '../customHook/useGetUser';
 const RequiredAuth = ({ children }) => {
    const navigate = useNavigate()
    const {service} = useGetUser();
- 
+   // 
    useEffect(()=>{
-    if(service.status=="error"){
+    if(service.isLoading) return () => {}
+    if(service.status == "error"){
         navigate("/login")
     }else{
-        navigate("/dashboard")
+        navigate("/")
     }
    },[service.status])
     
-    
+  // console.log(service.status)
+      
     if(service.isLoading){
-        return <div>Loading</div>
+       return  <div>Loading</div>
     }
     
     return <> {children} </>

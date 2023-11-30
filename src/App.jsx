@@ -13,11 +13,11 @@ function App() {
   return (
     <div className="my-4 ">
       <Routes>
-        <Route path="/" element={<RequiredAuth> <Home /></RequiredAuth> }></Route>
+        {/* <Route path="/" element={<RequiredAuth> <Home /></RequiredAuth> }></Route> */}
         <Route path="/login" element= {<RequiredAuth> <Login /></RequiredAuth> }></Route>
         <Route path="/register" element={<Signup />}></Route>
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <RequiredAuth>
               <Dashboard />

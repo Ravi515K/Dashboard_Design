@@ -2,7 +2,7 @@ import React from 'react'
 import { AiOutlineNumber, AiFillMessage, AiFillBell } from 'react-icons/ai'
 import useGetUser from '../customHook/useGetUser'
 function Header() {
-    const {cacheUserData} = useGetUser()
+   // const {cacheUserData} = useGetUser()
     return (
         <div className='flex p-2 mb-5'>
             <div className='flex w-1/4 ml-10'>
@@ -25,8 +25,8 @@ function Header() {
                         <img className='w-50 h-50 rounded-full' src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww' />
                     </div>
                     <div className='text-center grid items-center'>
-                        <h1 className='text-15 font-bold'>{cacheUserData?.name}</h1>
-                        <p className='text-sm text-brown'>{cacheUserData?.email}</p>
+                        <h1 className='text-15 font-bold'>{""}</h1>
+                        <p className='text-sm text-brown'>{""}</p>
                     </div>
                 </div>
             </div>

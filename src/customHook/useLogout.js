@@ -7,10 +7,11 @@ function useLogout() {
   const token = localStorage.getItem("token");
   const Logout = async () => {
    const res = await axios
-      .post("https://uatapicorporatetravel.fynity.in/api/logout", {
+      .post("https://uatapicorporatetravel.fynity.in/api/logout",{}, {
         headers: {
+          "Accept":"application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       })
       return res

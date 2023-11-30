@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios'; 
 
 
-function useGetUser() {
+function useFetchUser() {
   const token = localStorage.getItem("token") 
   
   const queryClient = useQueryClient();
@@ -25,15 +25,15 @@ function useGetUser() {
     }
   };
 
-  const service = useQuery({
-    queryKey: ["user"],
+  const {data} = useQuery({
+    queryKey: ["LogInUser"],
     queryFn: getUserData,
-    staleTime:1000*60*5
+    staleTime:10000
   });
 // console.log(service)
-  const cacheUserData = queryClient.getQueryData(['user']);
+ // const cacheUserData = queryClient.getQueryData(['LogInUser']);
   //console.log(cacheUserData)
-  return {service, cacheUserData};
+  return {data};
 }
 
-export default useGetUser;
+export default useFetchUser;

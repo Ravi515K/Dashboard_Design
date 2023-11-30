@@ -17,7 +17,7 @@ const Signup = () => {
     navigate('/login')
   }
   const handleHome = () => {
-    navigate('/home')
+    navigate('/')
   }
 
   return (

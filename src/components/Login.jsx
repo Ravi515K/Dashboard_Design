@@ -34,7 +34,7 @@ const Login = () => {
           // Save the token to localStorage
           localStorage.setItem("token", token);
 
-          navigate("/dashboard");
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -46,7 +46,7 @@ const Login = () => {
     navigate("/register");
   };
   const handleDashboard = () => {
-    navigate("/dashboard");
+    navigate("/");
   };
   return (
     <div>
@@ -70,7 +70,6 @@ const Login = () => {
               className="font-bold text-[22px] cursor-pointer"
               onClick={handleSignup}
             >
-              {" "}
               SignUp
             </h1>
           </div>
