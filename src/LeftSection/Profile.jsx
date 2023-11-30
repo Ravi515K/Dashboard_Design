@@ -1,8 +1,7 @@
 import React from 'react'
-import {FiLogOut} from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi'
 import useGetUser from '../customHook/useGetUser'
 import useLogout from '../customHook/useLogout'
-import useFetchUser from '../customHook/useFetchUser'
 function Profile() {
   
     const {cacheUserData} = useGetUser()

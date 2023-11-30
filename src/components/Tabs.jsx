@@ -7,7 +7,7 @@ import CardType from "./CardType";
 const getUsers = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
   const result = await response.json();
-  //  console.log(result)
+  
   return result;
 };
 export default function Tabs() {
@@ -23,12 +23,10 @@ export default function Tabs() {
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = data?.slice(indexOfFirstUser, indexOfLastUser);
-  // console.log(data);
-
   
-  console.log(tab)
+
+
   const paginate = (Pagnum) => {
-    // console.log(Pagnum)
     setCurrentPage((prev) => prev + Pagnum);
   };
 

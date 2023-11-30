@@ -12,10 +12,9 @@ import {
   DeleteInactiveIcon,
   EditActiveIcon,
   EditInactiveIcon,
-} from "./MenuOpton/Icon";
+} from "../ServerIcon/Icon";
 
-export default function DropDown({ id1,singleEdit }) {
-//  console.log(id1)
+export default function DropDown({ id1, singleEdit }) {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const deleteMember = (id1) => {
@@ -24,7 +23,7 @@ export default function DropDown({ id1,singleEdit }) {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          'Authorization':
+          Authorization:
             "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
         },
       });
@@ -37,9 +36,9 @@ export default function DropDown({ id1,singleEdit }) {
       return deleteMember(id1);
     },
     onSuccess: () => {
-      setTimeout(()=>{
+      setTimeout(() => {
         queryClient.invalidateQueries({ queryKey: ["member"] });
-      },500)
+      }, 500);
     },
   });
 
@@ -47,12 +46,10 @@ export default function DropDown({ id1,singleEdit }) {
     mutation.mutate(id1);
   };
 
-  const openEdit = (id1,singleEdit) => {
-    // console.log(id1,singleEdit)
+  const openEdit = (id1, singleEdit) => {
     if (id1 && singleEdit) {
-      dispatch(openEditModal_in(id1))
-    }else{
-     
+      dispatch(openEditModal_in(id1));
+    } else {
       dispatch(openEditModal(id1));
     }
   };
@@ -101,75 +98,8 @@ export default function DropDown({ id1,singleEdit }) {
                   </button>
                 )}
               </Menu.Item>
-              {/* <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <DuplicateActiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <DuplicateInactiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Duplicate
-                  </button>
-                )}
-              </Menu.Item> */}
             </div>
-            {/* <div className="px-1 py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <ArchiveActiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <ArchiveInactiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Archive
-                  </button>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
-                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  >
-                    {active ? (
-                      <MoveActiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <MoveInactiveIcon
-                        className="mr-2 h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    )}
-                    Move
-                  </button>
-                )}
-              </Menu.Item>
-            </div> */}
+
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (

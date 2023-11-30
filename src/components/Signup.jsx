@@ -1,4 +1,4 @@
-// src/Signup.js
+
 import React, { useState } from 'react';
 import { AiOutlineNumber } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
 
   const handleSignup = () => {
-    // Implement your signup logic here
+   
     console.log('Username:', username);
     console.log('Password:', password);
   };

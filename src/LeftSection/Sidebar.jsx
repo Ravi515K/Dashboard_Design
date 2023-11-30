@@ -1,23 +1,13 @@
+import { Disclosure } from "@headlessui/react";
 import React, { useState } from "react";
 import { BiSolidDashboard } from "react-icons/bi";
-import { Disclosure } from "@headlessui/react";
-import { FaAngleDown } from "react-icons/fa";
-import {
-  FaChartBar,
-  FaMoneyBill,
-  FaUsers,
-  FaFileAlt,
-  FaCog,
-} from "react-icons/fa";
-
+import {FaAngleDown, FaChartBar, FaCog, FaFileAlt, FaMoneyBill,FaUsers} from "react-icons/fa";
 import { AiOutlineNumber } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import Menu from "../components/Menu";
-import { useSelector } from "react-redux";
 
 function Sidebar({ index }) {
-  const {isModal} = useSelector((state)=>state.AddMember.isModal)
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -34,9 +24,8 @@ function Sidebar({ index }) {
   };
 
  
-
   return (
-    <div className="lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A px-4 mt-[-15px]">
+    <aside className="lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A px-4 mt-[-15px]">
       <div className="lg:hidden">
         <button onClick={toggleMenu} className="block text-3xl py-4 px-4">
           ☰
@@ -132,7 +121,7 @@ function Sidebar({ index }) {
           </div>
         </div>
       )}
-    </div>
+    </aside>
   );
 }
 

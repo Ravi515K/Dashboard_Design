@@ -1,44 +1,31 @@
-import Sidebar from "./LeftSection/Sidebar";
-import Profile from "./LeftSection/Profile";
-import TeamMember from "./RightSection/TeamMember";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SingleMember from "./components/SingleMember";
-import { openModal_in } from "./Redux/Slices/AddMember/AddMember";
-import Modal from "./components/Modal";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import EditModal from "./components/EditModal";
-import useGetMember from "./customHook/useFetch";
+import Profile from "../LeftSection/Profile";
+import Sidebar from "../LeftSection/Sidebar";
+import EditModal from "../Modals/EditModal";
+import Modal from "../Modals/Modal";
+import { openModal_in } from "../Redux/Slices/AddMember/AddMember";
+import SingleMember from "../components/SingleMember";
+import useGetMember from "../customHook/useFetch";
 
 function DetailPage() {
-  const { inModal, inEdit, isEdit } = useSelector((state) => state.AddMember);
- // console.log(inEdit,isEdit)
+  const { inModal, inEdit } = useSelector((state) => state.AddMember);
+
   const dispatch = useDispatch();
   const { id } = useParams();
-  const queryClient = useQueryClient();
-  const {data} = useGetMember()
+  const { data } = useGetMember();
 
   let excludedData = [];
   let singleMemberData;
- 
-  
 
-  //   const  data = queryClient.getQueryData(["member"]);
-  //   // console.log(data)
-    excludedData = data?.filter((item) => item.id != id);
-   // console.log(excludedData)
-    singleMemberData = data?.find((item) => item.id == id);
-  
- 
- // console.log(singleMemberData)
+  excludedData = data?.filter((item) => item.id != id);
 
+  singleMemberData = data?.find((item) => item.id == id);
 
   const handleInModal = () => {
     dispatch(openModal_in());
-  }
-
-
+  };
 
   return (
     <div className="flex p-0 m-0">
@@ -98,7 +85,6 @@ function DetailPage() {
         {inModal ? <Modal /> : null}
         {inEdit ? <EditModal /> : null}
       </div>
-      {/* <TeamMember excludedData={excludedData}/> */}
     </div>
   );
 }

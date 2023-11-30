@@ -1,17 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import axiosInstance from "../axios-instance/apiInstance";
 
 function useLogout() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const Logout = async () => {
-   const res = await axios
-      .post("https://uatapicorporatetravel.fynity.in/api/logout",{}, {
+   const res = await axiosInstance.post('/logout',{}, {
         headers: {
-          "Accept":"application/json",
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          'Authorization': `Bearer ${token}`,
         },
       })
       return res

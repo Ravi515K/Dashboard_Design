@@ -1,8 +1,7 @@
-// src/Login.js
-import axios from "axios";
 import React, { useState } from "react";
 import { AiOutlineNumber } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../axios-instance/apiInstance";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,27 +12,20 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    axios.post("https://uatapicorporatetravel.fynity.in/api/login",
+    axiosInstance.post("/login",
         {
           email: email,
           password: password,
           device_name: "window",
         },
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
+       
       )
       .then((res) => {
-        // console.log(res.data.token ,"HII")
+        
         const token = res.data.token;
 
         if (token) {
-          // Save the token to localStorage
           localStorage.setItem("token", token);
-
           navigate("/");
         }
       })
@@ -48,6 +40,8 @@ const Login = () => {
   const handleDashboard = () => {
     navigate("/");
   };
+
+
   return (
     <div>
       <div className=" border border-black bg-violet">

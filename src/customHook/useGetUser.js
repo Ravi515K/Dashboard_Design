@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios'; 
+import axiosInstance from '../axios-instance/apiInstance';
 
 
 function useGetUser() {
@@ -10,10 +10,8 @@ function useGetUser() {
   const getUserData = async () => {
     
     try {
-      const response = await axios.get('https://uatapicorporatetravel.fynity.in/api/user', {
+      const response = await axiosInstance.get('/user', {
         headers: {
-          "Accept" :"application/json",
-          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         }
       });
@@ -30,9 +28,9 @@ function useGetUser() {
     queryFn: getUserData,
     staleTime:1000*60*5
   });
-// console.log(service)
+
   const cacheUserData = queryClient.getQueryData(['user']);
-  //console.log(cacheUserData)
+ 
   return {service, cacheUserData};
 }
 

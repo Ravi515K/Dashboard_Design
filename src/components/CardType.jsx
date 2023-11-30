@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import { ImCheckboxChecked } from "react-icons/im"
+import React from "react";
+import { ImCheckboxChecked } from "react-icons/im";
 function CardType({ data }) {
   
   return (

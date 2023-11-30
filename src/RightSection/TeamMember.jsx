@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { openModal } from "../Redux/Slices/AddMember/AddMember";
 import SingleMember from "../components/SingleMember";
-import { useDispatch, useSelector } from "react-redux";
-import { GetData, openModal } from "../Redux/Slices/AddMember/AddMember";
-import { useQuery } from "@tanstack/react-query";
 import useGetMember from "../customHook/useFetch";
 
 function TeamMember() {
   const dispatch = useDispatch();
   const {cacheData} = useGetMember()
- // console.log(data)
+ 
  
   const handleModal = () => {
     dispatch(openModal());

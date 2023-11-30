@@ -1,8 +1,7 @@
 import React from 'react'
-import { AiOutlineNumber, AiFillMessage, AiFillBell } from 'react-icons/ai'
-import useGetUser from '../customHook/useGetUser'
+import { AiFillBell, AiFillMessage, AiOutlineNumber } from 'react-icons/ai'
 function Header() {
-   // const {cacheUserData} = useGetUser()
+  
     return (
         <div className='flex p-2 mb-5'>
             <div className='flex w-1/4 ml-10'>
@@ -26,7 +25,7 @@ function Header() {
                     </div>
                     <div className='text-center grid items-center'>
                         <h1 className='text-15 font-bold'>{""}</h1>
-                        <p className='text-sm text-brown'>{""}</p>
+                        <h3 className='text-sm text-brown'>{""}</h3>
                     </div>
                 </div>
             </div>

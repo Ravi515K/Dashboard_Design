@@ -26,13 +26,13 @@ function Menu({index}) {
       let data = [...arr]
 
       const draggedItemContent = data.splice(dragItem.current, 1)[0]
-       // console.log(draggedItemContent,"current obj")
+
         data.splice(dragOverItem.current,0,draggedItemContent)
         // reset the ref position
         dragItem.current = null;
         dragOverItem.current = null;
 
-        // set New Arr
+      
         setArr(data)
     }
   return (
@@ -73,53 +73,3 @@ export default Menu;
 
 
 
-{/* <li
-        draggable
-        onDragStart={() => handleDragStart(1)}
-        onDragOver={() => handleDragOver(1)}
-        onDrop={handleDrop}
-        className="flex items-center py-2 my-2"
-      >
-       { `< ${item.icon} className="mr-4 ml-2" /> `} {item.name}
-      </li>
-      <li
-        draggable
-        onDragStart={() => handleDragStart(2)}
-        onDragOver={() => handleDragOver(2)}
-        onDrop={handleDrop}
-        className="flex items-center py-2 my-2"
-      >
-        { `< ${arr[2].icon} className="mr-4 ml-2" /> `} {arr[2].name}
-      </li>
-      <li
-        className={`flex items-center rounded-lg py-2 my-2 cursor-pointer ${
-          activeIndex === 3 ? "bg-light-green" : ""
-        }`}
-        onClick={() => {
-          handleUser();
-        }}
-        draggable
-        onDragStart={() => handleDragStart(3)}
-        onDragOver={() => handleDragOver(3)}
-        onDrop={handleDrop}
-      >
-        { `< ${item.icon} className="mr-4 ml-2" /> `} {item.name}
-      </li>
-      <li
-        draggable
-        onDragStart={() => handleDragStart(4)}
-        onDragOver={() => handleDragOver(4)}
-        onDrop={handleDrop}
-        className="flex items-center py-2 my-2"
-      >
-        { `< ${item.icon} className="mr-4 ml-2" /> `} {item.name}
-      </li>
-      <li
-        draggable
-        onDragStart={() => handleDragStart(5)}
-        onDragOver={() => handleDragOver(5)}
-        onDrop={handleDrop}
-        className="flex items-center py-2 my-2"
-      >
-       { `< ${item.icon} className="mr-4 ml-2" /> `} {item.name}
-      </li> */}

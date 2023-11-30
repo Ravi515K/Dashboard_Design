@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Profile from "../LeftSection/Profile";
 import "../App.css";
-import Pagination from "./Pagination";
-import Tabs from "./Tabs";
+import Pagination from "../components/Pagination";
+import Tabs from "../components/Tabs";
 import Sidebar from "../LeftSection/Sidebar";
 
 const getUsers = async () => {
@@ -12,23 +12,19 @@ const getUsers = async () => {
   return result;
 };
 function Users() {
-  
   return (
     <div className="flex justify-center w-[100%] h-fit p-0 m-0 border border-black ">
       <div className="w-[20%]">
         <Sidebar index={3} />
         <Profile />
       </div>
-      
-     
-
       <div className="border border-black w-[80%]">
         <h2 className="text-center font-semibold bg-blue py-6">User List</h2>
-        <div className="w-[100%]"> <Tabs /></div>
-       
-       
+        <div className="w-[100%]">
+        
+          <Tabs />
+        </div>
       </div>
-      
     </div>
   );
 }
