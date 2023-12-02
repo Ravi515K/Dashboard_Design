@@ -1,13 +1,11 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "./Pages/Dashboard";
-import DetailPage from "./Pages/DetailPage";
-import Users from "./Pages/Users";
-import Login from "./Pages/Login";
+import Users from "./Pages/Users/Users";
+import Dashboard from "./Pages/Home/Dashboard"
+import Login from "./Pages/Login/Login";
 import Signup from "./components/Signup";
 import RequiredAuth from "./hoc/RequredRouth";
-import Home from "./Pages/Home";
-import LoginAuth from "./hoc/LoginAuth";
+import DetailPage from "./Pages/DetailPage/DetailPage";
 
 function App() {
   return (

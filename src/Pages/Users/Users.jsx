@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import Profile from "../LeftSection/Profile";
-import "../App.css";
-import Pagination from "../components/Pagination";
-import Tabs from "../components/Tabs";
-import Sidebar from "../LeftSection/Sidebar";
+import Profile from "../../LeftSection/Profile";
+import Tabs from "./components/Tabs";
+import Sidebar from "../../LeftSection/Sidebar";
 
 const getUsers = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");

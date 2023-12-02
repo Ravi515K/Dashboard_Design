@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import Profile from "../LeftSection/Profile";
-import Sidebar from "../LeftSection/Sidebar";
-import EditModal from "../Modals/EditModal";
-import Modal from "../Modals/Modal";
-import { openModal_in } from "../Redux/Slices/AddMember/AddMember";
-import SingleMember from "../components/SingleMember";
-import useGetMember from "../customHook/useFetch";
+import Profile from "../../LeftSection/Profile";
+import Sidebar from "../../LeftSection/Sidebar";
+import EditModal from "../../Modals/EditModal";
+import Modal from "../../Modals/Modal";
+import { openModal_in } from "../../Redux/Slices/AddMember/AddMember";
+import SingleMember from "../../components/SingleMember";
+import useGetMember from "../../customHook/useFetch";
 
 function DetailPage() {
   const { inModal, inEdit } = useSelector((state) => state.AddMember);

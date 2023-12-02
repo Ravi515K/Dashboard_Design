@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useSelector } from "react-redux";
-import Profile from "../LeftSection/Profile";
-import Sidebar from "../LeftSection/Sidebar";
-import Analysis from "../MiddleSection/Analysis";
-import Cards from "../MiddleSection/Cards";
-import RegularSell from "../MiddleSection/RegularSell";
-import TopStore from "../MiddleSection/TopStore";
-import EditModal from "../Modals/EditModal";
-import Modal from "../Modals/Modal";
-import FirstCard from "../RightSection/FirstCard";
-import Meeting from "../RightSection/Meeting";
-import Message from "../RightSection/Message";
-import TeamMember from "../RightSection/TeamMember";
+import Profile from "../../LeftSection/Profile";
+import Sidebar from "../../LeftSection/Sidebar";
+import Analysis from "../../MiddleSection/Analysis";
+import Cards from "../../MiddleSection/Cards";
+import RegularSell from "../../MiddleSection/RegularSell";
+import TopStore from "../../MiddleSection/TopStore";
+import EditModal from "../../Modals/EditModal";
+import Modal from "../../Modals/Modal";
+import FirstCard from "../../RightSection/FirstCard";
+import Meeting from "../../RightSection/Meeting";
+import Message from "../../RightSection/Message";
+import TeamMember from "../../RightSection/TeamMember";
 function Dashboard() {
   
   const { isModal, isEdit } = useSelector((state) => state.AddMember);
@@ -56,7 +56,7 @@ function Dashboard() {
         </div>
 
         <div className="lg:w-2/4 md:w-[45%vw] md:px-2 lg:ml-[290px] md:ml-[100px] sm:w-[100%] overflow-auto ">
-          <div className="">
+          <div className="lg:w-[100%]">
             <Cards />
           </div>
           <div className="grid lg:grid-cols-2 sm:grid-cols-1 sm:text-center gap-5 mt-10 mb-10 justify-between ">

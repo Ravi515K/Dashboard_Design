@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineNumber } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../axios-instance/apiInstance";
+import axiosInstance from "../../axios-instance/apiInstance";
 
 const Login = () => {
   const navigate = useNavigate();
