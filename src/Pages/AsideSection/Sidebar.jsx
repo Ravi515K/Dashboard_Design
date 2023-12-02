@@ -1,11 +1,18 @@
 import { Disclosure } from "@headlessui/react";
 import React, { useState } from "react";
 import { BiSolidDashboard } from "react-icons/bi";
-import {FaAngleDown, FaChartBar, FaCog, FaFileAlt, FaMoneyBill,FaUsers} from "react-icons/fa";
+import {
+  FaAngleDown,
+  FaChartBar,
+  FaCog,
+  FaFileAlt,
+  FaMoneyBill,
+  FaUsers,
+} from "react-icons/fa";
 import { AiOutlineNumber } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
-import Menu from "../components/Menu";
+import Menu from "../../components/Menu";
 
 function Sidebar({ index }) {
   const navigate = useNavigate();
@@ -23,7 +30,6 @@ function Sidebar({ index }) {
     navigate("/");
   };
 
- 
   return (
     <aside className="lg:w-1/4 md:w-1/3 w-2/5 text-#4A4D4A px-4 mt-[-15px]">
       <div className="lg:hidden">
@@ -46,21 +52,25 @@ function Sidebar({ index }) {
           </div>
           <div>
             <Disclosure>
-            {({ open }) => (
-            <>
-              <Disclosure.Button className="w-[200px] py-2 flex justify-between font-bold rounded-md border bg-blue-200 p-2 border-black">
-                Menu
-                <span className="mt-1"><FaAngleDown  className={`${
-                    open ? 'rotate-180 transform' : ''
-                  } h-5 w-5`}/></span>
-              </Disclosure.Button>
-              <Disclosure.Panel className="text-gray-500">
-                <ul className="ul-sidebar">
-                  <Menu index={index} />
-                </ul>
-              </Disclosure.Panel>
-              </>
-               )}
+              {({ open }) => (
+                <>
+                  <Disclosure.Button className="w-[200px] py-2 flex justify-between font-bold rounded-md border bg-blue-200 p-2 border-black">
+                    Menu
+                    <span className="mt-1">
+                      <FaAngleDown
+                        className={`${
+                          open ? "rotate-180 transform" : ""
+                        } h-5 w-5`}
+                      />
+                    </span>
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="text-gray-500">
+                    <ul className="ul-sidebar">
+                      <Menu index={index} />
+                    </ul>
+                  </Disclosure.Panel>
+                </>
+              )}
             </Disclosure>
           </div>
         </div>

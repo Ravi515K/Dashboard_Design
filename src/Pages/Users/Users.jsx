@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Profile from "../../LeftSection/Profile";
+import Profile from "../AsideSection/components/Profile";
 import Tabs from "./components/Tabs";
-import Sidebar from "../../LeftSection/Sidebar";
+import Sidebar from "../AsideSection/Sidebar";
 
 const getUsers = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -19,7 +19,6 @@ function Users() {
       <div className="border border-black w-[80%]">
         <h2 className="text-center font-semibold bg-blue py-6">User List</h2>
         <div className="w-[100%]">
-        
           <Tabs />
         </div>
       </div>

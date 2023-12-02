@@ -2,7 +2,7 @@ import { Tab } from "@headlessui/react";
 import React, { useState } from "react";
 import Pagination from "./Pagination";
 import { useQuery } from "@tanstack/react-query";
-import CardType from "../../../components/CardType";
+import CardType from "./CardType";
 
 const getUsers = async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");

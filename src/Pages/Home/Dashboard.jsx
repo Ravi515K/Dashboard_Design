@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useSelector } from "react-redux";
-import Profile from "../../LeftSection/Profile";
-import Sidebar from "../../LeftSection/Sidebar";
+import Profile from "../AsideSection/components/Profile";
+import Sidebar from "../AsideSection/Sidebar";
 import Analysis from "../../MiddleSection/Analysis";
 import Cards from "../../MiddleSection/Cards";
 import RegularSell from "../../MiddleSection/RegularSell";
@@ -14,9 +14,7 @@ import Meeting from "../../RightSection/Meeting";
 import Message from "../../RightSection/Message";
 import TeamMember from "../../RightSection/TeamMember";
 function Dashboard() {
-  
   const { isModal, isEdit } = useSelector((state) => state.AddMember);
- 
 
   const getMember = async () => {
     try {
@@ -29,7 +27,7 @@ function Dashboard() {
         },
       });
       let result = await res.json();
-   
+
       dispatch(GetData(result));
       return result;
     } catch {
