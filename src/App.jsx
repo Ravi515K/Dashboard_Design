@@ -1,12 +1,14 @@
 import "./App.css";
+import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Users from "./Pages/Users/Users";
-import Dashboard from "./Pages/Home/Dashboard"
+// import Dashboard from "./Pages/Home/Dashboard"
+
 import Login from "./Pages/Login/Login";
 import Signup from "./components/Signup";
 import RequiredAuth from "./hoc/RequredRouth";
 import DetailPage from "./Pages/DetailPage/DetailPage";
-
+const Dashboard = lazy(() => import("./Pages/Home/Dashboard"));
 function App() {
   return (
     <div className="my-4 ">
@@ -24,7 +26,9 @@ function App() {
           path="/"
           element={
             <RequiredAuth>
-              <Dashboard />
+              <Suspense fallback={<div>sdfghjkjgdsdfghjkasdfghjkl</div>}>
+                <Dashboard />
+              </Suspense>
             </RequiredAuth>
           }
         ></Route>

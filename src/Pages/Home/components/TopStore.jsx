@@ -1,5 +1,5 @@
 import React from 'react'
-import "../App.css"
+import "../../../App.css"
 function TopStore() {
     const data = [
         { store_name: 'Solaris Sparkle', location: 'Miami, Florida', sell: '102 Quantity', amount: '12.50k' },

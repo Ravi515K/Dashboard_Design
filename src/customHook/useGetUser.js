@@ -4,7 +4,7 @@ import axiosInstance from '../axios-instance/apiInstance';
 
 function useGetUser() {
   const token = localStorage.getItem("token") 
-  
+
   const queryClient = useQueryClient();
 
   const getUserData = async () => {

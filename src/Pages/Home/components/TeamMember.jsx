@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { openModal } from "../Redux/Slices/AddMember/AddMember";
-import SingleMember from "../components/SingleMember";
-import useGetMember from "../customHook/useFetch";
+import { openModal } from "../../../Redux/Slices/AddMember/AddMember";
+import SingleMember from "../../../components/SingleMember";
+import useGetMember from "../../../customHook/useFetch";
 
 function TeamMember() {
   const dispatch = useDispatch();

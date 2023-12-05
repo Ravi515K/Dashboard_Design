@@ -12,7 +12,7 @@ import {
   DeleteInactiveIcon,
   EditActiveIcon,
   EditInactiveIcon,
-} from "../ServerIcon/Icon";
+} from "../assets/ServerIcon/Icon";
 
 export default function DropDown({ id1, singleEdit }) {
   const dispatch = useDispatch();

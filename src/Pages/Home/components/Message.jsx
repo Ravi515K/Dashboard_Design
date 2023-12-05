@@ -1,6 +1,7 @@
 import React from 'react'
 import { AiFillMessage, AiFillBell } from 'react-icons/ai'
-import useGetUser from '../customHook/useGetUser'
+import useGetUser from '../../../customHook/useGetUser'
+
 
 function Message() {
     const {cacheUserData} = useGetUser()

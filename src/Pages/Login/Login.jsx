@@ -12,16 +12,13 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    axiosInstance.post("/login",
-        {
-          email: email,
-          password: password,
-          device_name: "window",
-        },
-       
-      )
+   axiosInstance
+      .post("/login", {
+        email: email,
+        password: password,
+        device_name: "window",
+      })
       .then((res) => {
-        
         const token = res.data.token;
 
         if (token) {
@@ -32,6 +29,7 @@ const Login = () => {
       .catch((err) => {
         console.error(err);
       });
+    
   };
 
   const handleSignup = (e) => {

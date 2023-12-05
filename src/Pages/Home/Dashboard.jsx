@@ -2,44 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useSelector } from "react-redux";
 import Profile from "../AsideSection/components/Profile";
-import Sidebar from "../AsideSection/Sidebar";
-import Analysis from "../../MiddleSection/Analysis";
-import Cards from "../../MiddleSection/Cards";
-import RegularSell from "../../MiddleSection/RegularSell";
-import TopStore from "../../MiddleSection/TopStore";
+import Sidebar from "../AsideSection/components/Sidebar";
+import Analysis from "./components/Analysis";
+import Cards from "./components/Cards";
+import RegularSell from "./components/RegularSell";
+import TopStore from "./components/TopStore";
 import EditModal from "../../Modals/EditModal";
 import Modal from "../../Modals/Modal";
-import FirstCard from "../../RightSection/FirstCard";
-import Meeting from "../../RightSection/Meeting";
-import Message from "../../RightSection/Message";
-import TeamMember from "../../RightSection/TeamMember";
+import FirstCard from "./components/FirstCard";
+import Meeting from "./components/Meeting";
+import TeamMember from "./components/TeamMember";
+import Message from "./components/Message";
 function Dashboard() {
   const { isModal, isEdit } = useSelector((state) => state.AddMember);
-
-  const getMember = async () => {
-    try {
-      const res = await fetch("https://gorest.co.in/public/v2/users", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
-        },
-      });
-      let result = await res.json();
-
-      dispatch(GetData(result));
-      return result;
-    } catch {
-      (err) => console.log(err);
-    }
-  };
-
-  const { data } = useQuery({
-    queryKey: ["member"],
-    queryFn: getMember,
-    staleTime: 10000,
-  });
 
   return (
     <div className="sm-text-sm md:text-md">

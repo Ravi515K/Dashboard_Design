@@ -12,7 +12,7 @@ import {
 import { AiOutlineNumber } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
-import Menu from "../../components/Menu";
+import Menu from "../../../components/Menu";
 
 function Sidebar({ index }) {
   const navigate = useNavigate();
