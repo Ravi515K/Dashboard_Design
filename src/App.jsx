@@ -8,6 +8,7 @@ import Login from "./Pages/Login/Login";
 import Signup from "./components/Signup";
 import RequiredAuth from "./hoc/RequredRouth";
 import DetailPage from "./Pages/DetailPage/DetailPage";
+import CellReports from "./Pages/CellReports/CellReports";
 const Dashboard = lazy(() => import("./Pages/Home/Dashboard"));
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         ></Route>
         <Route path="/detail/:id" element={<DetailPage />}></Route>
         <Route path="/users" element={<Users />} />
+        <Route path="/cellreport" element={<CellReports />} />
       </Routes>
     </div>
   );

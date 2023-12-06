@@ -11,7 +11,7 @@ const PageData = [
     {icon:FaChartBar,name:'Statics',path:"/",id:2},
     {icon:FaMoneyBill,name:'Transaction',path:"/",id:3},
     {icon:FaUsers,name:'Users',path:"/users",id:4},
-    {icon:FaFileAlt,name:'Cell Reports',path:"/",id:5},
+    {icon:FaFileAlt,name:'Cell Reports',path:"/cellreport",id:5},
     {icon:FaCog,name:'Settings',path:"/",id:6},
 ]
 

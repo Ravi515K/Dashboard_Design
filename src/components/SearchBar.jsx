@@ -12,6 +12,7 @@ export default function SearchBar() {
   const [data, setData] = useState(PageData);
   const [selected, setSelected] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+
   const filteredPeople =
     query === ""
       ? data
@@ -23,10 +24,31 @@ export default function SearchBar() {
         );
 
   const handleRedirect = (path) => {
-    console.log("hi");
-    
     navigate(path);
   };
+
+  const handleKeyDown = (e) => {
+
+    if (e.key === 'Enter') {
+    
+      if(query){
+        data.find((item)=>{
+          if(item.name.toLowerCase().includes(query.toLowerCase())){
+            navigate(item.path)
+          }
+        })
+      }
+      
+    }
+
+  };
+
+  const handleSelect = () => {
+ 
+    if(selected){
+      navigate(selected.path)
+    }
+  }
 
   useEffect(() => {
     const handleKeypress = (e) => {
@@ -43,18 +65,19 @@ export default function SearchBar() {
 
   return (
     <div className="">
-      <Combobox value={selected} onChange={setSelected}>
+      <Combobox value={selected} onChange={setSelected} onSelect={handleSelect}>
         <div className="relative mt-1">
           <div className="relative w-full h-8 cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
-            <Combobox.Button>
+            <Combobox.Button  className="w-full flex items-center">
               <CiSearch
                 className="h-8 w-8 text-gray-400 cursor-pointer absolute inset-y-0 left-0 flex items-center pl-2"
                 aria-hidden="true"
               />
               <Combobox.Input
-                className="w-full border-none h-4 py-2 pl-3 pr-10 text-md text-center leading-5 outline-none text-gray-900 focus:ring-0"
+                className="w-full border-none h-4 py-2 px-12 mt-1 pr-10 text-md  leading-5 outline-none text-gray-900 focus:ring-0"
                 displayValue={(person) => person.name}
                 onChange={(event) => setQuery(event.target.value)}
+                onKeyDown={handleKeyDown}
                 ref={searchRef}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
@@ -80,7 +103,7 @@ export default function SearchBar() {
                     onClick={() => handleRedirect(person.path)}
                     key={person.id}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
                         active ? "bg-teal-600 text-white" : "text-gray-900"
                       }`
                     }
