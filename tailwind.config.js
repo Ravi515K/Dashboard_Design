@@ -18,7 +18,8 @@ export default {
          'middle-bg':'#DBDCDE',
          'white':'#FFFFFF',
          'red':'#A21717',
-         'blue-200':'#0F658D'
+         'blue-200':'#0F658D',
+         'grey':'#E8E8E8'
       },
      
       height: {

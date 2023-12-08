@@ -97,38 +97,28 @@ function EditModal() {
     e.preventDefault();
     const validationErrors = {};
 
-    // Validate the imgUrl
-    // if (!formData.imgUrl) {
-    //   validationErrors.imgUrl = "Image URL is required";
-    // }
-    // console.log("2")
-    // Validate the name
     if (!formData.name) {
       validationErrors.name = "Name is required";
     }
 
-    // Validate the role
+  
     if (!formData.gender) {
       validationErrors.gender = "Gender is required";
     }
-    // console.log("3")
+    
     if (!formData.email) {
       validationErrors.email = "email is required";
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      // Form is valid, you can submit the data or perform other actions
-     
-      //   dispatch(memberData(formData));
-
       mutation.mutate(formData);
       dispatch(addData(formData));
       dispatch(closeEditModal());
-      //  dispatch(singleMemberData(formData.id))
+     
       alert("Added Member Successfully");
-      // console.log("Form is valid. Data:", formData);
+      
     } else {
-      // Update the errors state
+    
       setErrors(validationErrors);
     }
   };
