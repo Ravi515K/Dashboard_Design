@@ -7,18 +7,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {data} from "./CellRepoprts.constant"
+import { data } from "./CellRepoprts.constant";
 import { FaRegArrowAltCircleDown, FaRegArrowAltCircleUp } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import EditModal from "./components/EditModal";
 import { BiSolidEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 
-
-
 function CellReports() {
+  const [person, setPerson] = useState(data);
 
-  const [person, setPerson] = useState(data)
   const columns = [
     {
       header: "ID",
@@ -37,31 +35,29 @@ function CellReports() {
       accessorKey: "role",
     },
     {
-      header:"Actions",
-      accessorKey:"action",
-     cell:(info=>{
-    
-      return (
-        <button onClick={()=>handleAction(info.row.original)}>
-          <BsThreeDots className="text-[#40493B]"/>
-        </button>
-      )
-     
-     })
+      header: "Actions",
+      accessorKey: "action",
+      cell: (info) => {
+        return (
+          <button onClick={() => handleAction(info.row.original)}>
+            <BsThreeDots className="text-[#40493B]" />
+          </button>
+        );
+      },
     },
     {
-      header:"Edit",
-      accessorKey:"edit",
-      cell:(info=>{
-        return <BiSolidEdit onClick={()=>handleEdit(info.row.original)}/>
-      })
+      header: "Edit",
+      accessorKey: "edit",
+      cell: (info) => {
+        return <BiSolidEdit onClick={() => handleEdit(info.row.original)} />;
+      },
     },
     {
-      header:"Delete",
-      accessorKey:"delete",
-      cell:(info=>{
-        return <AiFillDelete onClick={()=>handleDelete(info.row.original)}/>
-      })
+      header: "Delete",
+      accessorKey: "delete",
+      cell: (info) => {
+        return <AiFillDelete onClick={() => handleDelete(info.row.original)} />;
+      },
     },
   ];
 
@@ -69,9 +65,9 @@ function CellReports() {
   const [filtering, setFiltering] = useState("");
   const [colVisible, setColVisible] = useState({});
   const [toggle, setToggle] = useState(false);
-  const [show, setShow] = useState(false)
-  const [editData, setEditData] = useState({})
- 
+  const [show, setShow] = useState(false);
+  const [editData, setEditData] = useState({});
+
   const table = useReactTable({
     data,
     columns,
@@ -97,15 +93,14 @@ function CellReports() {
   const handleToggle = () => {
     setToggle(!toggle);
   };
- 
+
   const handleAction = (obj) => {
-    alert(`Hi ${obj.name} is Here`)
-  }
+    alert(`Hi ${obj.name} is Here`);
+  };
   const handleEdit = (obj) => {
-    setEditData(obj)
-    setShow(!show)
-    
-}
+    setEditData(obj);
+    setShow(!show);
+  };
   return (
     <div className="w-full flex items-center justify-center h-screen">
       <div className="w-[50%]  border-2 border-[#91D273] p-5">
@@ -128,7 +123,7 @@ function CellReports() {
 
           {toggle ? (
             <div className="flex">
-             <div className="px-1">
+              <div className="px-1">
                 <button
                   className="w-16 h-10  rounded-md bg-[#A4AE9E]  border border-[#91D273]"
                   onClick={handleToggle}
@@ -136,107 +131,115 @@ function CellReports() {
                   Toggle
                 </button>
               </div>
-            <div className="border border-[#91D273] shadow rounded absolute right-[240px] top-[240px]">
-             
-              {table.getAllLeafColumns().map((column) => {
-              
-                return (
-                  <div key={column.id} className="px-1">
-                    <label className="text-[#40493B]">
-                      <input
-                        {...{
-                          type: "checkbox",
-                          checked: column.getIsVisible(),
-                          onChange: column.getToggleVisibilityHandler(),
-                         
-                        }}
-                     
-                      />{" "}
-                      {column.id}
-                    </label>
-                  </div>
-                );
-              })}
-            </div>
+              <div className="border border-[#91D273] shadow rounded absolute right-[240px] top-[240px]">
+                {table.getAllLeafColumns().map((column) => {
+                  return (
+                    <div key={column.id} className="px-1">
+                      <label className="text-[#40493B]">
+                        <input
+                          {...{
+                            type: "checkbox",
+                            checked: column.getIsVisible(),
+                            onChange: column.getToggleVisibilityHandler(),
+                          }}
+                        />{" "}
+                        {column.id}
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           ) : null}
         </div>
-       
-          <table className="table-auto border-collapse border text-[#40493B] border-green-600 w-full ">
-            <thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id} className="bg-[#74a85c]">
-                  {headerGroup.headers.map((header) => (
-                    <th
-                      key={header.key}
-                      className="border border-slate-300 text-white w-auto text-center"
-                      onClick={header.column.getToggleSortingHandler()}
-                    >
-                      <div className="flex items-center justify-center ">
+
+        <table className="table-auto border-collapse border text-[#40493B] border-green-600 w-full ">
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id} className="bg-[#74a85c]">
+                {headerGroup.headers.map((header) => (
+                  <th
+                    key={header.key}
+                    className="border border-slate-300 text-white w-auto text-center"
+                    onClick={header.column.getToggleSortingHandler()}
+                  >
+                    <div className="flex items-center justify-center ">
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
                       {
-                        
                         {
-                          asc:<FaRegArrowAltCircleUp className="text-[#1d2a17] ml-2"/>,
-                          desc:<FaRegArrowAltCircleDown className="text-[#1d2a17] ml-2"/>,
+                          asc: (
+                            <FaRegArrowAltCircleUp className="text-[#1d2a17] ml-2" />
+                          ),
+                          desc: (
+                            <FaRegArrowAltCircleDown className="text-[#1d2a17] ml-2" />
+                          ),
                         }[header.column.getIsSorted() ?? NULL]
                       }
-                      </div>
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {table.getRowModel().rows.map((row, ind) => (
-                <tr key={row.id} className={`${ind % 2 === 0 ? 'bg-white text-center' : 'bg-white text-center'}`}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className="border border-slate-300 w-auto p-3"
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-       
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row, ind) => (
+              <tr
+                key={row.id}
+                className={`${
+                  ind % 2 === 0
+                    ? "bg-white text-center"
+                    : "bg-white text-center"
+                }`}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <td
+                    key={cell.id}
+                    className="border border-slate-300 w-auto p-3"
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
         <div className="flex justify-between mt-2">
-        
           <button
             disabled={!table.getCanPreviousPage()}
             onClick={() => table.previousPage()}
-            className={`${!table.getCanPreviousPage() ? 'text-gray-500 w-auto bg-white p-1 rounded-md' : 'w-auto text-white bg-[#659350] p-1 rounded-md'}`}
-            >
+            className={`${
+              !table.getCanPreviousPage()
+                ? "text-gray-500 w-auto bg-white p-1 rounded-md"
+                : "w-auto text-white bg-[#659350] p-1 rounded-md"
+            }`}
+          >
             goTo Previous
           </button>
           <div className="text-[#40493B]">
-            Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount()}
           </div>
           <button
             disabled={!table.getCanNextPage()}
             onClick={() => table.nextPage()}
-            className={`${!table.getCanNextPage() ? 'text-gray-500 w-auto bg-white p-1 rounded-md' : 'w-auto text-white bg-[#659350] p-1 rounded-md'}`}
+            className={`${
+              !table.getCanNextPage()
+                ? "text-gray-500 w-auto bg-white p-1 rounded-md"
+                : "w-auto text-white bg-[#659350] p-1 rounded-md"
+            }`}
           >
             goTo next
           </button>
         </div>
       </div>
-      {
-        show ? (
-          <EditModal obj={editData} />
-        )
-        :
-        null
-      }
-      <div>
-
-      </div>
+      {show ? (
+        <EditModal obj={editData} person={person} setPerson={setPerson} />
+      ) : null}
+      <div></div>
     </div>
   );
 }

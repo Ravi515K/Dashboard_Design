@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { data } from "../CellRepoprts.constant";
 
-export default function EditModal({ obj }) {
+export default function EditModal({ obj, person, setPerson }) {
   let [isOpen, setIsOpen] = useState(true);
   const [user, setUser] = useState({
     id: obj.id,
@@ -22,16 +22,17 @@ export default function EditModal({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(user)
-    // const data = data.filter((el) => {
-    //     if(el.id==user.id){
-    //         return user
-    //     }else {
-    //         return el
-    //     }
-    // });
-
-   
+    let personData = person.filter((el) => {
+      if (el.id === user.id) {
+        console.log("hii")
+       // console.log(user)
+        return user;
+      } else {
+        return el;
+      }
+    });
+    console.log(personData)
+    setPerson(personData);
     setIsOpen(false);
   };
   return (
