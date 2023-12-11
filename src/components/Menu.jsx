@@ -10,7 +10,7 @@ function Menu({ index }) {
   const dragOverItem = useRef(null);
 
   const handleSort = () => {
-    console.log(dragItem, "dragItem");
+   
     let data = [...arr];
 
     const draggedItemContent = data.splice(dragItem.current, 1)[0];

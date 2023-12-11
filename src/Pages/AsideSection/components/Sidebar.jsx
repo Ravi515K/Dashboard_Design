@@ -13,6 +13,7 @@ import { AiOutlineNumber } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import Menu from "../../../components/Menu";
+import Profile from "./Profile";
 
 function Sidebar({ index }) {
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ function Sidebar({ index }) {
               <FaMoneyBill className="mr-4 ml-2" /> Transaction
             </li>
             <li className="flex items-center my-2">
-              <FaUsers className="mr-4 ml-2" /> My Team
+              <FaUsers className="mr-4 ml-2" /> Users
             </li>
             <li className="flex items-center my-2">
               <FaFileAlt className="mr-4 ml-2" /> Cell Reports
@@ -113,24 +114,10 @@ function Sidebar({ index }) {
               <FaCog className="mr-4 ml-2" /> Settings
             </li>
           </ul>
-          <div className="profile mt-[150px] ml-[-30px]">
-            <div className="flex justify-center">
-              <img
-                className="w-50 h-50 rounded-full"
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww"
-              />
-            </div>
-            <h1 className="font-semibold flex justify-center">Nora Watson</h1>
-            <p className="text-10 text-brown flex justify-center">
-              sales Manager
-            </p>
-            <div className="flex mt-10 justify-center">
-              <FiLogOut className="mt-1 " />
-              <h2 className="font-semibold ml-6">Log Out</h2>
-            </div>
-          </div>
+          
         </div>
       )}
+  
     </aside>
   );
 }

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import { data } from "../CellRepoprts.constant";
+import toast from "react-hot-toast";
 
-export default function EditModal({ obj, person, setPerson }) {
+
+export default function AddModal({setPerson, person}) {
   let [isOpen, setIsOpen] = useState(true);
   const [user, setUser] = useState({
-    id: obj.id,
-    name: obj.name,
-    gender: obj.gender,
-    role: obj.role,
+    id: person.length+1,
+    name: "",
+    gender: "",
+    role: "",
   });
 
   const handleChange = (e) => {
@@ -22,14 +23,37 @@ export default function EditModal({ obj, person, setPerson }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     
-    let index = person.findIndex(obj => obj.id === user.id);
-    const newPerson=[...person]
-    if (index !== -1) {
-      newPerson.splice(index, 1, user);
-      setPerson(newPerson)
+  const userExists = person.some((el) => el.name.toLowerCase() === user.name.toLowerCase())
+
+    const validationErrors = {};
+
+    if(userExists){
+        
+        toast.error("User Already Existed")
     }
+    else{
+      if (!user.name) {
+        validationErrors.name = "Name is required";
+      }
+  
+      
+      if (!user.gender) {
+        validationErrors.gender = "Gender is required";
+      }
+      
+      if (!user.role) {
+        validationErrors.email = "Role is required";
+      }
+      if (Object.keys(validationErrors).length === 0) {
+          setPerson([user,...person])
+          toast.success("New User Added")
+        }
+    }
+
     
+      
     setIsOpen(false);
   };
   return (
@@ -40,9 +64,7 @@ export default function EditModal({ obj, person, setPerson }) {
     >
       <div className="fixed inset-0 backdrop-blur-sm flex w-screen items-center justify-center p-4 ">
         <Dialog.Panel className="w-full max-w-sm rounded bg-white border-2 border-[#1F723F] p-10">
-          <Dialog.Title className={"font-semibold"}>
-            Edit Your Information
-          </Dialog.Title>
+          <Dialog.Title className={"font-semibold"}>Add details</Dialog.Title>
           <div className="mt-5">
             <form className="w-full" onSubmit={handleSubmit}>
               <div className="flex justify-between">
@@ -94,8 +116,12 @@ export default function EditModal({ obj, person, setPerson }) {
                 </button>
               </div>
             </form>
+            
           </div>
         </Dialog.Panel>
+        {/* <div>
+          <Toaster />
+        </div> */}
       </div>
     </Dialog>
   );
