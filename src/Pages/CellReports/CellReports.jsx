@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -7,21 +6,39 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { FaRegArrowAltCircleDown, FaRegArrowAltCircleUp } from "react-icons/fa";
-import { BsThreeDots } from "react-icons/bs";
-import EditModal from "./components/EditModal";
-import { BiSolidEdit } from "react-icons/bi";
+import { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
-import { data } from "./CellRepoprts.constant";
-import AddModal from "./components/AddModal";
-import Aside from "../AsideSection/Aside";
-import Sidebar from "../AsideSection/components/Sidebar";
-import Profile from "../AsideSection/components/Profile";
-import Navbar from "../Home/components/Navbar";
+import { BiSolidEdit } from "react-icons/bi";
+import { BsThreeDots } from "react-icons/bs";
+import { FaRegArrowAltCircleDown, FaRegArrowAltCircleUp } from "react-icons/fa";
 import TopNavbar from "src/components/TopNavbar";
+import Profile from "../AsideSection/components/Profile";
+import Sidebar from "../AsideSection/components/Sidebar";
+import { data } from "./Utility/CellRepoprts.constant";
+import AddModal from "./components/AddModal";
+import EditModal from "./components/EditModal";
+import useCrud from "./hook/useCrud";
+import Table from "./components/table";
 
 function CellReports() {
-  const [person, setPerson] = useState(data);
+  const {
+    handleAction,
+    handleDelete,
+    handleEdit,
+    handleToggle,
+    handleAdd,
+    person,
+    showAdd,
+    showEdit,
+    editData,
+    toggle,
+    setPerson
+  } = useCrud();
+ 
+  const [sorting, setSorting] = useState([]);
+  const [filtering, setFiltering] = useState("");
+  const [colVisible, setColVisible] = useState({});
+
   const columns = [
     {
       header: "ID",
@@ -54,25 +71,26 @@ function CellReports() {
       header: "Edit",
       accessorKey: "edit",
       cell: (info) => {
-        return <BiSolidEdit onClick={() => handleEdit(info.row.original)} />;
+        return (
+          <button>
+              <BiSolidEdit onClick={() => handleEdit(info.row.original)} />
+          </button>
+        )
+        
       },
     },
     {
       header: "Delete",
       accessorKey: "delete",
       cell: (info) => {
-        return <AiFillDelete onClick={() => handleDelete(info.row.original)} />;
+        return (
+          <button>
+              <AiFillDelete onClick={() => handleDelete(info.row.original)} />
+          </button>
+        )
       },
     },
   ];
-
-  const [sorting, setSorting] = useState([]);
-  const [filtering, setFiltering] = useState("");
-  const [colVisible, setColVisible] = useState({});
-  const [toggle, setToggle] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
-  const [showAdd, setShowAdd] = useState(false);
-  const [editData, setEditData] = useState({});
 
   const table = useReactTable({
     data: person,
@@ -96,40 +114,18 @@ function CellReports() {
     onColumnVisibilityChange: setColVisible,
   });
 
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
-
-  const handleAction = (obj) => {
-    alert(`Hi ${obj.name} is Here`);
-  };
-
-  const handleEdit = (obj) => {
-    setEditData(obj);
-    setShowEdit(!showEdit);
-  };
-
-  const handleDelete = (item) => {
-    const newData = person.filter((el) => el.id !== item.id);
-    setPerson(newData);
-  };
-
-  const handleAdd = () => {
-    setShowAdd(!showAdd);
-  };
-
   return (
     <div className="w-full flex">
       <div className="w-[20%]">
         <Sidebar index={4} />
         <Profile />
       </div>
-      <div className="w-[80%]">
-        <div className="mb-[50px]">
-           <TopNavbar />
+      <div className="w-[80%] h-auto">
+        <div className="mb-[100px]">
+          <TopNavbar />
         </div>
-        <div className="flex items-center justify-center h-screen">
-          <div className="w-[60%]  border-2 border-[#91D273] p-5">
+        <div className="flex items-center justify-center">
+          <div className="w-[80%]  border-2 border-[#91D273] p-5">
             <div className="text-left px-3">
               <button
                 className="w-16 h-10  rounded-md bg-white border border-[#91D273]"
@@ -165,7 +161,7 @@ function CellReports() {
                       Toggle
                     </button>
                   </div>
-                  <div className="border border-[#91D273] shadow rounded absolute right-[240px] top-[240px]">
+                  <div className="border border-[#91D273] shadow rounded absolute right-[20px] top-[240px]">
                     {table.getAllLeafColumns().map((column) => {
                       return (
                         <div key={column.id} className="px-1">
@@ -186,64 +182,14 @@ function CellReports() {
                 </div>
               ) : null}
             </div>
-
-            <table className="table-auto border-collapse border text-[#40493B] border-green-600 w-full ">
-              <thead>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <tr key={headerGroup.id} className="bg-[#74a85c]">
-                    {headerGroup.headers.map((header) => (
-                      <th
-                        key={header.key}
-                        className="border border-slate-300 text-white w-auto text-center"
-                        onClick={header.column.getToggleSortingHandler()}
-                      >
-                        <div className="flex items-center justify-center ">
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                          {
-                            {
-                              asc: (
-                                <FaRegArrowAltCircleUp className="text-[#1d2a17] ml-2" />
-                              ),
-                              desc: (
-                                <FaRegArrowAltCircleDown className="text-[#1d2a17] ml-2" />
-                              ),
-                            }[header.column.getIsSorted() ?? NULL]
-                          }
-                        </div>
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </thead>
-              <tbody>
-                {table.getRowModel().rows.map((row, ind) => (
-                  <tr
-                    key={row.id}
-                    className={`${
-                      ind % 2 === 0
-                        ? "bg-white text-center"
-                        : "bg-white text-center"
-                    }`}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <td
-                        key={cell.id}
-                        className="border border-slate-300 w-auto p-3"
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
+            <div className="">
+                <Table 
+                  table={table}
+                  flexRender={flexRender}
+                  
+                />
+            </div>
+                    
             <div className="flex justify-between mt-2">
               <button
                 disabled={!table.getCanPreviousPage()}

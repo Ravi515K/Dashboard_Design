@@ -1,35 +1,32 @@
-import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import { data } from "../CellRepoprts.constant";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function EditModal({ obj, person, setPerson }) {
+ 
+  let id = obj.id
   let [isOpen, setIsOpen] = useState(true);
-  const [user, setUser] = useState({
-    id: obj.id,
-    name: obj.name,
-    gender: obj.gender,
-    role: obj.role,
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    let index = person.findIndex(obj => obj.id === user.id);
-    const newPerson=[...person]
+  const handleEdit = (data) => {
+    console.log(data.name)
+    const index = person.findIndex(
+      (item) => item.id === data.id && item.name.toLowerCase() !== data.name.toLowerCase()
+    );
+    console.log(index)
+    const newPerson = [...person];
     if (index !== -1) {
-      newPerson.splice(index, 1, user);
-      setPerson(newPerson)
+      newPerson.splice(index, 1, data);
+      setPerson(newPerson);
+    }else{
+      toast.errors("user Already Existed")
+
     }
-    
+
     setIsOpen(false);
   };
   return (
@@ -44,7 +41,7 @@ export default function EditModal({ obj, person, setPerson }) {
             Edit Your Information
           </Dialog.Title>
           <div className="mt-5">
-            <form className="w-full" onSubmit={handleSubmit}>
+            {/* <form className="w-full" onSubmit={handleSubmit}>
               <div className="flex justify-between">
                 <label htmlFor="">Id :</label>
                 <input
@@ -85,6 +82,65 @@ export default function EditModal({ obj, person, setPerson }) {
                   className="border border-gray-400 rounded-md px-2"
                 />
               </div>
+              <div className="flex justify-left mt-7">
+                <button
+                  type={"submit"}
+                  className="w-16 h-8 p-3 rounded-md border bg-[#91D273] border-black flex justify-center items-center"
+                >
+                  Submit
+                </button>
+              </div>
+            </form> */}
+            <form className="w-full" onSubmit={handleSubmit(handleEdit)}>
+              <div className="flex justify-between">
+                <label htmlFor="">Id :</label>
+                <input
+                  defaultValue={id}
+                  {...register("id", { required: "id Required" })}
+                  className="border border-gray-400 rounded-md px-2"
+                />
+              </div>
+              {errors.id && (
+                <small className="text-red-500 ml-[120px]">
+                  {errors.id.message}
+                </small>
+              )}
+              <div className="flex justify-between mt-5">
+                <label htmlFor="">Name :</label>
+                <input
+                  {...register("name", { required: "name Required" })}
+                  className="border border-gray-400 rounded-md px-2"
+                />
+              </div>
+              {errors.name && (
+                <small className="text-red-500 ml-[120px]">
+                  {errors.name.message}
+                </small>
+              )}
+              <div className="flex justify-between mt-5">
+                <label>Gender :</label>
+                <input
+                  {...register("gender", { required: "gender Required" })}
+                  className="border border-gray-400 rounded-md px-2"
+                />
+              </div>
+              {errors.gender && (
+                <small className="text-red-500 ml-[120px]">
+                  {errors.gender.message}
+                </small>
+              )}
+              <div className="flex justify-between mt-5">
+                <label htmlFor="">Role :</label>
+                <input
+                  {...register("role", { required: "role Required" })}
+                  className="border border-gray-400 rounded-md px-2"
+                />
+              </div>
+              {errors.role && (
+                <small className="text-red-500 block ml-[120px]">
+                  {errors.role.message}
+                </small>
+              )}
               <div className="flex justify-left mt-7">
                 <button
                   type={"submit"}

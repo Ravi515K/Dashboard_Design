@@ -37,7 +37,7 @@ function Menu({ index }) {
               className={`flex items-center  rounded-lg py-2 my-2 ${
                 activeIndex === ind ? "bg-light-green" : ""
               }`}
-              onClick={() => handleItemClick(0)}
+              // onClick={() => handleItemClick(0)}
             >
               <span className="mr-4 ml-2">{<Icon/>}</span> {name}
             </li>

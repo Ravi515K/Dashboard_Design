@@ -1,23 +1,29 @@
 
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiOutlineNumber } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const {register, handleSubmit, formState:{errors}} = useForm()
   const navigate = useNavigate()
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
 
-  const handleSignup = () => {
+  // const handleSignup = () => {
    
-    console.log('Username:', username);
-    console.log('Password:', password);
-  };
+  //   console.log('Username:', username);
+  //   console.log('Password:', password);
+  // };
   const handleLogin = () => {
     navigate('/login')
   }
   const handleHome = () => {
     navigate('/')
+  }
+
+  const handleSignup = (data) =>{
+    console.log(data)
   }
 
   return (
@@ -44,15 +50,16 @@ const Signup = () => {
     <div className="flex items-center justify-center h-screen">
       <div className="w-96 bg-gray-100 p-6 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-        <form>
+        <form  onSubmit={handleSubmit(handleSignup)}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-gray-700">Username</label>
             <input
               type="text"
               id="username"
               className="w-full border rounded-md py-2 px-3"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              // value={username}
+              // onChange={(e) => setUsername(e.target.value)}
+              {...register("username",{required:"username Required"})}
             />
           </div>
           <div className="mb-4">
@@ -61,14 +68,14 @@ const Signup = () => {
               type="password"
               id="password"
               className="w-full border rounded-md py-2 px-3"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              // value={password}
+              // onChange={(e) => setPassword(e.target.value)}
+              {...register("password",{required:"Password Required"})}
             />
           </div>
           <button
-            type="button"
+            type="submit"
             className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
-            onClick={handleSignup}
           >
             Sign Up
           </button>

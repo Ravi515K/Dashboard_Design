@@ -52,10 +52,10 @@ function Sidebar({ index }) {
             </div>
           </div>
           <div>
-            <Disclosure>
+            <Disclosure defaultOpen={true}>
               {({ open }) => (
                 <>
-                  <Disclosure.Button className="w-[200px] py-2 flex justify-between font-bold rounded-md border bg-blue-200 p-2 border-black">
+                  <Disclosure.Button className="w-[200px] py-2 flex justify-evenly font-bold rounded-md border bg-[#bbd096] p-2 border-black">
                     Menu
                     <span className="mt-1">
                       <FaAngleDown

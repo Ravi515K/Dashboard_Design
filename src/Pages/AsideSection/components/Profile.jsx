@@ -9,7 +9,7 @@ function Profile() {
     mutation.mutate();
   };
   return (
-    <div className="profile mt-[150px] ml-[-30px] hidden lg:block">
+    <div className="profile mt-[0px] hidden lg:block">
       <div className="flex justify-center">
         <img
           className="w-50 h-50 rounded-full"
