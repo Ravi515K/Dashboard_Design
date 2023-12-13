@@ -9,38 +9,42 @@ import {
   addData,
   closeEditModal
 } from "../Redux/Slices/AddMember/AddMember";
+import GlobalForm from "src/components/GlobalForm";
+import useFetch from "src/customHook/useFetch";
+import toast from "react-hot-toast";
 
 function EditModal() {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+  const {cacheData} = useFetch()
   const id = useSelector((state) => state.AddMember.delete_Id);
  // console.log(id)
   const singleData = queryClient.getQueryData(['member'])?.find((el)=>{return el.id==id})
  // console.log(singleData)
-  const [formData, setFormData] = useState({
-    id: singleData.id,
-    name: singleData.name,
-    email: singleData.email,
-    gender:singleData.gender,
-    status: "inactive",
-  });
-  const [errors, setErrors] = useState({});
+  // const [formData, setFormData] = useState({
+  //   id: singleData.id,
+  //   name: singleData.name,
+  //   email: singleData.email,
+  //   gender:singleData.gender,
+  //   status: "inactive",
+  // });
+  // const [errors, setErrors] = useState({});
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
 
-    if (e.target.type === "radio") {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-  };
+  //   if (e.target.type === "radio") {
+  //     setFormData({
+  //       ...formData,
+  //       [name]: value,
+  //     });
+  //   } else {
+  //     setFormData({
+  //       ...formData,
+  //       [name]: value,
+  //     });
+  //   }
+  // };
 
   //   const handleImageUpload = (e) => {
   //     const file = e.target.files[0];
@@ -64,9 +68,26 @@ function EditModal() {
   //     }
   // };
 
+  const onSubmit = (data) => {
+        
+    const nameExist = cacheData.some(el=>el.name.toLowerCase() == data.name.toLowerCase())
+   
+   
+   if(nameExist){
+       toast.error("username already Selected")
+    }else{
+       mutation.mutate(data);
+       dispatch(addData(data));
+       dispatch(closeEditModal());
+       toast.success("username Added Succefully")
+    }
+    
+  };
+
   const editData = async (formData) => {
+   
     const res = await fetch(
-      `https://gorest.co.in/public/v2/users/${formData.id}`,
+      `https://gorest.co.in/public/v2/users/${singleData.id}`,
       {
         method: "PATCH",
         headers: {
@@ -91,44 +112,44 @@ function EditModal() {
       queryClient.invalidateQueries({ queryKey: ["member"] });
     },
   });
-  // console.log(mutation)
-  const handleSubmit = (e) => {
-    // console.log("id",id,formData)
-    e.preventDefault();
-    const validationErrors = {};
+ 
+  // const handleSubmit = (e) => {
+  //   // console.log("id",id,formData)
+  //   e.preventDefault();
+  //   const validationErrors = {};
 
-    if (!formData.name) {
-      validationErrors.name = "Name is required";
-    }
+  //   if (!formData.name) {
+  //     validationErrors.name = "Name is required";
+  //   }
 
   
-    if (!formData.gender) {
-      validationErrors.gender = "Gender is required";
-    }
+  //   if (!formData.gender) {
+  //     validationErrors.gender = "Gender is required";
+  //   }
     
-    if (!formData.email) {
-      validationErrors.email = "email is required";
-    }
+  //   if (!formData.email) {
+  //     validationErrors.email = "email is required";
+  //   }
 
-    if (Object.keys(validationErrors).length === 0) {
-      mutation.mutate(formData);
-      dispatch(addData(formData));
-      dispatch(closeEditModal());
+  //   if (Object.keys(validationErrors).length === 0) {
+  //     mutation.mutate(formData);
+  //     dispatch(addData(formData));
+  //     dispatch(closeEditModal());
      
-      alert("Added Member Successfully");
+  //     alert("Added Member Successfully");
       
-    } else {
+  //   } else {
     
-      setErrors(validationErrors);
-    }
-  };
+  //     setErrors(validationErrors);
+  //   }
+  // };
 
-  const handleClose = () => {
-    dispatch(closeEditModal());
-  };
+  // const handleClose = () => {
+  //   dispatch(closeEditModal());
+  // };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-40">
-      <form
+      {/* <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
@@ -219,25 +240,7 @@ function EditModal() {
             </div>
           </label>
         </div>
-        {/* <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imgUrl">
-                        Image
-                    </label>
-                    <input
-                        className={`shadow appearance-none border ${errors.imgUrl ? "border-red-500" : "border-gray-300"} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                        type="file"
-                        id="imgUrl"
-                        // name="imgUrl"
-                        accept="image/*"
-                        // value={formData.imgUrl}
-                        onChange={handleImageUpload}
-                        placeholder="Image URL"
-                        required
-                    />
-                    {errors.imgUrl && (
-                        <p className="text-red-500 text-xs italic">{errors.imgUrl}</p>
-                    )}
-                </div> */}
+        
         <div className="flex items-center justify-between">
           <button
             className="bg-blue hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -245,9 +248,10 @@ function EditModal() {
           >
             Edit
           </button>
-          {/* <SubmitButton /> */}
+          
         </div>
-      </form>
+      </form> */}
+      <GlobalForm onSubmit={onSubmit} h1={"Edit Member"} modalAction={closeEditModal} singleData={singleData}/>
     </div>
   );
 }

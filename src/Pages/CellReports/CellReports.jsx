@@ -9,16 +9,14 @@ import {
 import { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BiSolidEdit } from "react-icons/bi";
-import { BsThreeDots } from "react-icons/bs";
-import { FaRegArrowAltCircleDown, FaRegArrowAltCircleUp } from "react-icons/fa";
 import TopNavbar from "src/components/TopNavbar";
 import Profile from "../AsideSection/components/Profile";
 import Sidebar from "../AsideSection/components/Sidebar";
-import { data } from "./Utility/CellRepoprts.constant";
+import Action from "./components/Action";
 import AddModal from "./components/AddModal";
 import EditModal from "./components/EditModal";
-import useCrud from "./hook/useCrud";
 import Table from "./components/table";
+import useCrud from "./hook/useCrud";
 
 function CellReports() {
   const {
@@ -32,9 +30,9 @@ function CellReports() {
     showEdit,
     editData,
     toggle,
-    setPerson
+    setPerson,
   } = useCrud();
- 
+
   const [sorting, setSorting] = useState([]);
   const [filtering, setFiltering] = useState("");
   const [colVisible, setColVisible] = useState({});
@@ -62,7 +60,7 @@ function CellReports() {
       cell: (info) => {
         return (
           <button onClick={() => handleAction(info.row.original)}>
-            <BsThreeDots className="text-[#40493B]" />
+            <Action />
           </button>
         );
       },
@@ -73,10 +71,9 @@ function CellReports() {
       cell: (info) => {
         return (
           <button>
-              <BiSolidEdit onClick={() => handleEdit(info.row.original)} />
+            <BiSolidEdit onClick={() => handleEdit(info.row.original)} />
           </button>
-        )
-        
+        );
       },
     },
     {
@@ -85,9 +82,9 @@ function CellReports() {
       cell: (info) => {
         return (
           <button>
-              <AiFillDelete onClick={() => handleDelete(info.row.original)} />
+            <AiFillDelete onClick={() => handleDelete(info.row.original)} />
           </button>
-        )
+        );
       },
     },
   ];
@@ -124,16 +121,8 @@ function CellReports() {
         <div className="mb-[100px]">
           <TopNavbar />
         </div>
-        <div className="flex items-center justify-center">
-          <div className="w-[80%]  border-2 border-[#91D273] p-5">
-            <div className="text-left px-3">
-              <button
-                className="w-16 h-10  rounded-md bg-white border border-[#91D273]"
-                onClick={handleAdd}
-              >
-                ADD
-              </button>
-            </div>
+        <div className="flex ">
+          <div className="w-[100%] p-2">
             <div className="flex justify-between p-2">
               <input
                 type="text"
@@ -142,6 +131,14 @@ function CellReports() {
                 onChange={(e) => setFiltering(e.target.value)}
                 className=" w-[80%] my-2 rounded-md pl-3 border-2 border-[#91D273]"
               />
+              <div className="text-left px-3">
+                <button
+                  className="w-16 h-10  rounded-md bg-white border border-[#91D273]"
+                  onClick={handleAdd}
+                >
+                  ADD
+                </button>
+              </div>
               {!toggle ? (
                 <button
                   className="w-16 h-10  rounded-md bg-white border border-[#91D273]"
@@ -183,13 +180,9 @@ function CellReports() {
               ) : null}
             </div>
             <div className="">
-                <Table 
-                  table={table}
-                  flexRender={flexRender}
-                  
-                />
+              <Table table={table} flexRender={flexRender} />
             </div>
-                    
+
             <div className="flex justify-between mt-2">
               <button
                 disabled={!table.getCanPreviousPage()}

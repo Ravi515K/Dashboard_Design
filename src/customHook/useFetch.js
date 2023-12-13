@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 
-const useGetMember = () => {
+const useFetch = () => {
 
   const queryClient = useQueryClient();
    
@@ -35,18 +35,8 @@ const useGetMember = () => {
     staleTime: 10000,
   });
   const cacheData = queryClient.getQueryData(['member'])
-// console.log(isLoading,isFetching)
-//   useEffect(() => {
-
-//     const refetchMemberData = async () => {
-//       await queryClient.invalidateQueries(["member"]);
-//     };
-
-  
-
-//   }, [queryClient]);
 
   return { data, cacheData };
 };
 
-export default useGetMember;
+export default useFetch;

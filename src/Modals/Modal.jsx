@@ -1,73 +1,34 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 import { addData, closeModal } from "../Redux/Slices/AddMember/AddMember";
+import AddForm from "src/components/AddForm";
+import useFetch from "src/customHook/useFetch";
+import GlobalForm from "src/components/GlobalForm";
+import toast from "react-hot-toast";
+
+
 function Modal() {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient()
-  
-  const [formData, setFormData] = useState({
-    id: new Date().getTime(),
-    name: "",
-    email: "",
-    gender: "",
-    status: "inactive",
-  });
-  const [errors, setErrors] = useState({});
+   const {cacheData} = useFetch()
+   const dispatch = useDispatch();
+   const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    if (e.target.type === "radio") {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-  };
-
-  //   const handleImageUpload = (e) => {
-  //     const file = e.target.files[0];
-  //    // console.log(e.target.files)
-  //     // Check if a file is selected
-  //     if (file) {
-  //         // Perform file type validation here if needed
-
-  //         // Update the formData state with the selected file
-  //         setFormData({
-  //             ...formData,
-  //             imgFile: file
-  //         });
-
-  //         // Convert the file to a URL
-  //         const imgUrl = URL.createObjectURL(file);
-  //         setFormData({
-  //             ...formData,
-  //             imgUrl: imgUrl
-  //         });
-  //     }
-  // };
 
   const postData = async (formData) => {
-   
+    
     const res = await fetch("https://gorest.co.in/public/v2/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization":
+        Authorization:
           "Bearer 39c73ae0c166fedbeb5c0b6e5b79dbf0c251b0c68f0485d6686687ab9c76c18e",
       },
       body: JSON.stringify(formData),
     });
 
     const data = await res.json();
-    // console.log(data)
+   
     return data;
   };
 
@@ -80,45 +41,25 @@ function Modal() {
     },
   });
 
- 
-  const handleSubmit = (e) => {
-    
-    e.preventDefault();
-    const validationErrors = {};
-
-    if (!formData.name) {
-      validationErrors.name = "Name is required";
-    }
-
-    
-    if (!formData.gender) {
-      validationErrors.gender = "Gender is required";
-    }
-    
-    if (!formData.email) {
-      validationErrors.email = "email is required";
-    }
-
-    if (Object.keys(validationErrors).length === 0) {
-      
-      mutation.mutate(formData);
-      dispatch(addData(formData));
-      dispatch(closeModal());
-
-      alert("Added Member Successfully");
+  const onSubmit = (data) => {
+        
+    const nameExist = cacheData.some(el=>el.name.toLowerCase() == data.name.toLowerCase())
+   
+   
+   if(nameExist){
+       toast.error("username already Selected")
+    }else{
+       mutation.mutate(data);
+       dispatch(addData(data));
      
-    } else {
-      
-      setErrors(validationErrors);
+       toast.success("username Added Succefully")
     }
-  };
-
-  const handleClose = () => {
     dispatch(closeModal());
-  };
+};
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-40">
-      <form
+      {/* <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
@@ -187,7 +128,6 @@ function Modal() {
                 name="gender"
                 class="mr-2"
                 value={"male"}
-                
                 onChange={handleInputChange}
                 required
               />
@@ -208,25 +148,7 @@ function Modal() {
             </div>
           </label>
         </div>
-        {/* <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="imgUrl">
-                        Image
-                    </label>
-                    <input
-                        className={`shadow appearance-none border ${errors.imgUrl ? "border-red-500" : "border-gray-300"} rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
-                        type="file"
-                        id="imgUrl"
-                        // name="imgUrl"
-                        accept="image/*"
-                        // value={formData.imgUrl}
-                        onChange={handleImageUpload}
-                        placeholder="Image URL"
-                        required
-                    />
-                    {errors.imgUrl && (
-                        <p className="text-red-500 text-xs italic">{errors.imgUrl}</p>
-                    )}
-                </div> */}
+
         <div className="flex items-center justify-between">
           <button
             className="bg-blue hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -234,9 +156,9 @@ function Modal() {
           >
             Submit
           </button>
-          
         </div>
-      </form>
+      </form> */}
+      <GlobalForm onSubmit={onSubmit} h1={"Add Member"} modalAction={closeModal}/>
     </div>
   );
 }

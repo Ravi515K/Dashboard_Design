@@ -1,6 +1,7 @@
 import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function EditModal({ obj, person, setPerson }) {
  
@@ -13,20 +14,24 @@ export default function EditModal({ obj, person, setPerson }) {
   } = useForm();
 
   const handleEdit = (data) => {
-    console.log(data.name)
-    const index = person.findIndex(
-      (item) => item.id === data.id && item.name.toLowerCase() !== data.name.toLowerCase()
+
+    const userExists = person.some(
+      (el) => el.name.toLowerCase() == data.name.toLowerCase()
     );
-    console.log(index)
+    const index = person.findIndex(
+      (item) => item.id == data.id 
+    )
+   
     const newPerson = [...person];
-    if (index !== -1) {
-      newPerson.splice(index, 1, data);
-      setPerson(newPerson);
+    if(userExists){
+       toast.error('User Already Existed')
     }else{
-      toast.errors("user Already Existed")
-
+      if (index !== -1) {
+        newPerson.splice(index, 1, data);
+        setPerson(newPerson);
+        toast.success("User Added Succefully")
+      }
     }
-
     setIsOpen(false);
   };
   return (
@@ -41,61 +46,12 @@ export default function EditModal({ obj, person, setPerson }) {
             Edit Your Information
           </Dialog.Title>
           <div className="mt-5">
-            {/* <form className="w-full" onSubmit={handleSubmit}>
-              <div className="flex justify-between">
-                <label htmlFor="">Id :</label>
-                <input
-                  type="text"
-                  value={user.id}
-                  name="id"
-                  onChange={(e) => handleChange(e)}
-                  className="border border-gray-400 rounded-md px-2"
-                />
-              </div>
-              <div className="flex justify-between mt-5">
-                <label htmlFor="">Name :</label>
-                <input
-                  type="text"
-                  value={user.name}
-                  name="name"
-                  onChange={(e) => handleChange(e)}
-                  className="border border-gray-400 rounded-md px-2"
-                />
-              </div>
-              <div className="flex justify-between my-5">
-                <label>Gender :</label>
-                <input
-                  type="text"
-                  value={user.gender}
-                  name="gender"
-                  onChange={(e) => handleChange(e)}
-                  className="border border-gray-400 rounded-md px-2"
-                />
-              </div>
-              <div className="flex justify-between">
-                <label htmlFor="">Role :</label>
-                <input
-                  type="text"
-                  value={user.role}
-                  name="role"
-                  onChange={(e) => handleChange(e)}
-                  className="border border-gray-400 rounded-md px-2"
-                />
-              </div>
-              <div className="flex justify-left mt-7">
-                <button
-                  type={"submit"}
-                  className="w-16 h-8 p-3 rounded-md border bg-[#91D273] border-black flex justify-center items-center"
-                >
-                  Submit
-                </button>
-              </div>
-            </form> */}
             <form className="w-full" onSubmit={handleSubmit(handleEdit)}>
               <div className="flex justify-between">
                 <label htmlFor="">Id :</label>
                 <input
                   defaultValue={id}
+                  type="text"
                   {...register("id", { required: "id Required" })}
                   className="border border-gray-400 rounded-md px-2"
                 />

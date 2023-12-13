@@ -1,8 +1,6 @@
 import Message from "src/Pages/Home/components/Message";
 import SearchBar from "src/components/SearchBar";
 
-
-
 function TopNavbar() {
   
   return (
