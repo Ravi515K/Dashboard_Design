@@ -58,35 +58,36 @@ function CellReports() {
       header: "Actions",
       accessorKey: "action",
       cell: (info) => {
-        return (
-          <button onClick={() => handleAction(info.row.original)}>
-            <Action />
-          </button>
-        );
-      },
-    },
-    {
-      header: "Edit",
-      accessorKey: "edit",
-      cell: (info) => {
+       
         return (
           <button>
-            <BiSolidEdit onClick={() => handleEdit(info.row.original)} />
+            <Action obj={info.row.original}/>
           </button>
         );
       },
     },
-    {
-      header: "Delete",
-      accessorKey: "delete",
-      cell: (info) => {
-        return (
-          <button>
-            <AiFillDelete onClick={() => handleDelete(info.row.original)} />
-          </button>
-        );
-      },
-    },
+    // {
+    //   header: "Edit",
+    //   accessorKey: "edit",
+    //   cell: (info) => {
+    //     return (
+    //       <button>
+    //         <BiSolidEdit onClick={() => handleEdit(info.row.original)} />
+    //       </button>
+    //     );
+    //   },
+    // },
+    // {
+    //   header: "Delete",
+    //   accessorKey: "delete",
+    //   cell: (info) => {
+    //     return (
+    //       <button>
+    //         <AiFillDelete onClick={() => handleDelete(info.row.original)} />
+    //       </button>
+    //     );
+    //   },
+    // },
   ];
 
   const table = useReactTable({
@@ -94,7 +95,7 @@ function CellReports() {
     columns,
     initialState: {
       pagination: {
-        pageSize: 5,
+        pageSize: 8,
       },
     },
     state: {
@@ -110,7 +111,7 @@ function CellReports() {
     onGlobalfilterchange: setFiltering,
     onColumnVisibilityChange: setColVisible,
   });
-
+ 
   return (
     <div className="w-full flex">
       <div className="w-[20%]">
@@ -118,7 +119,7 @@ function CellReports() {
         <Profile />
       </div>
       <div className="w-[80%] h-auto">
-        <div className="mb-[100px]">
+        <div className="mb-[60px]">
           <TopNavbar />
         </div>
         <div className="flex ">
@@ -158,7 +159,7 @@ function CellReports() {
                       Toggle
                     </button>
                   </div>
-                  <div className="border border-[#91D273] shadow rounded absolute right-[20px] top-[240px]">
+                  <div className="border border-[#91D273] shadow rounded absolute right-[10px] top-[170px]">
                     {table.getAllLeafColumns().map((column) => {
                       return (
                         <div key={column.id} className="px-1">

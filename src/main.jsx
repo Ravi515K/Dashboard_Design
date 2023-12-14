@@ -21,6 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </Provider>
       </QueryClientProvider>
       <Toaster position="bottom-right"
+        toastOptions={{
+          duration:5000
+        }}
         reverseOrder={false}/>
     </BrowserRouter>
   </React.StrictMode>

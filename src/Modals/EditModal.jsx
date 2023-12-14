@@ -12,6 +12,7 @@ import {
 import GlobalForm from "src/components/GlobalForm";
 import useFetch from "src/customHook/useFetch";
 import toast from "react-hot-toast";
+import { IoIosClose } from "react-icons/io";
 
 function EditModal() {
   const dispatch = useDispatch();
@@ -74,12 +75,35 @@ function EditModal() {
    
    
    if(nameExist){
-       toast.error("username already Selected")
+    toast.error(
+    <>
+      <div className="flex">
+        <span>User Already Selected</span>
+
+        <button
+          onClick={() => toast.dismiss()}
+          className="border border-black relative ms-2 p-0.5 rounded-full"
+        >
+          <IoIosClose />
+        </button>
+      </div>
+    </>);
     }else{
        mutation.mutate(data);
        dispatch(addData(data));
        dispatch(closeEditModal());
-       toast.success("username Added Succefully")
+       toast.success(<>
+        <div className="flex">
+          <span>User Added Succefully</span>
+
+          <button
+            onClick={() => toast.dismiss()}
+            className="border border-black relative ms-2 p-0.5 rounded-full"
+          >
+            <IoIosClose />
+          </button>
+        </div>
+      </>);
     }
     
   };

@@ -26,16 +26,21 @@ function App() {
         <Route
           path="/"
           element={
-            <RequiredAuth>
+             <RequiredAuth>
               <Suspense fallback={<div>sdfghjkjgdsdfghjkasdfghjkl</div>}>
                 <Dashboard />
               </Suspense>
-            </RequiredAuth>
+             </RequiredAuth> 
           }
         ></Route>
         <Route path="/detail/:id" element={<DetailPage />}></Route>
         <Route path="/users" element={<Users />} />
-        <Route path="/cellreport" element={<RequiredAuth ><CellReports /></RequiredAuth> } />
+        <Route path="/cellreport" element={
+          <RequiredAuth >
+            <CellReports />
+          </RequiredAuth> 
+        }
+          />
       </Routes>
     </div>
   );

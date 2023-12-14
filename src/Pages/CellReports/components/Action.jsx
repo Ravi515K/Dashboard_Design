@@ -2,10 +2,12 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { DeleteActiveIcon , DeleteInactiveIcon,   EditActiveIcon,EditInactiveIcon,} from "src/assets/ServerIcon/Icon";
+import useCrud from "../hook/useCrud";
 
 
-export default function Action() {
-
+export default function Action({obj}) {
+ // console.log(obj)
+ const {handleEdit, handleDelete} = useCrud()
   return (
     <div className="">
       <Menu as="div" className=" inline-block text-left">
@@ -34,7 +36,7 @@ export default function Action() {
                     className={`${
                       active ? "bg-violet-500" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => openEdit(id1, singleEdit)}
+                    onClick={() => handleEdit(obj)}
                   >
                     {active ? (
                       <EditActiveIcon
@@ -60,7 +62,7 @@ export default function Action() {
                     className={`${
                       active ? "bg-violet-500" : "text-gray-900"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => handleDelete(id1)}
+                    onClick={() => handleDelete(obj.id)}
                   >
                     {active ? (
                       <DeleteActiveIcon

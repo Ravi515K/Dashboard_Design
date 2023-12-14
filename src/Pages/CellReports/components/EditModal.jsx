@@ -2,10 +2,11 @@ import { Dialog } from "@headlessui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { IoIosClose } from "react-icons/io";
 
 export default function EditModal({ obj, person, setPerson }) {
- 
-  let id = obj.id
+  console.log(obj);
+  let id = obj.id;
   let [isOpen, setIsOpen] = useState(true);
   const {
     register,
@@ -14,22 +15,43 @@ export default function EditModal({ obj, person, setPerson }) {
   } = useForm();
 
   const handleEdit = (data) => {
-
     const userExists = person.some(
       (el) => el.name.toLowerCase() == data.name.toLowerCase()
     );
-    const index = person.findIndex(
-      (item) => item.id == data.id 
-    )
-   
+    const index = person.findIndex((item) => item.id == data.id);
+
     const newPerson = [...person];
-    if(userExists){
-       toast.error('User Already Existed')
-    }else{
+    if (userExists) {
+      toast.error(<>
+        <div className="flex">
+          <span>User Already Selected</span>
+
+          <button
+            onClick={() => toast.dismiss()}
+            className="border border-black relative ms-2 p-0.5 rounded-full"
+          >
+            <IoIosClose />
+          </button>
+        </div>
+      </>);
+    } else {
       if (index !== -1) {
         newPerson.splice(index, 1, data);
         setPerson(newPerson);
-        toast.success("User Added Succefully")
+        toast.success(
+          <>
+            <div className="flex">
+              <span>Member added sucessfully</span>
+
+              <button
+                onClick={() => toast.dismiss()}
+                className="border border-black relative ms-2 p-0.5 rounded-full"
+              >
+                <IoIosClose />
+              </button>
+            </div>
+          </>
+        );
       }
     }
     setIsOpen(false);

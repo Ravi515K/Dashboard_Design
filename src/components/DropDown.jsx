@@ -13,6 +13,8 @@ import {
   EditActiveIcon,
   EditInactiveIcon,
 } from "../assets/ServerIcon/Icon";
+import toast from "react-hot-toast";
+import { IoIosClose } from "react-icons/io";
 
 export default function DropDown({ id1, singleEdit }) {
   const dispatch = useDispatch();
@@ -44,6 +46,20 @@ export default function DropDown({ id1, singleEdit }) {
 
   const handleDelete = (id1) => {
     mutation.mutate(id1);
+    toast.success(
+      <>
+      <div className="flex">
+          <span>User Deleted Succefully</span>
+
+          <button
+            onClick={() => toast.dismiss()}
+            className="border border-black relative ms-2 p-0.5 rounded-full"
+          >
+            <IoIosClose />
+          </button>
+        </div>
+      </>
+    )
   };
 
   const openEdit = (id1, singleEdit) => {

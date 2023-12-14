@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import axiosInstance from '../axios-instance/apiInstance';
+import axios from 'axios';
 
 
 function useGetUser() {
@@ -10,7 +10,7 @@ function useGetUser() {
   const getUserData = async () => {
     
     try {
-      const response = await axiosInstance.get('/user', {
+      const response = await axios ('https://uatapicorporatetravel.fynity.in/api/user', {
         headers: {
           "Authorization": `Bearer ${token}`
         }

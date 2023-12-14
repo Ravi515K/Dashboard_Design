@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { data } from "../Utility/CellRepoprts.constant";
 
 function useCrud() {
-    const [person, setPerson] = useState(data);
+  const [person, setPerson] = useState(data);
   const [toggle, setToggle] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
@@ -12,19 +12,23 @@ function useCrud() {
     setToggle(!toggle);
   };
 
-  const handleAction = (obj) => {
-    alert(`Hi ${obj.name} is Here`);
-  };
+  // const handleAction = (obj) => {
+    
+  // };
 
   const handleEdit = (obj) => {
+   
     setEditData(obj);
     setShowEdit(!showEdit);
   };
   const handleAdd = () => {
     setShowAdd(!showAdd);
   };
-  const handleDelete = (item) => {
-    const newData = person.filter((el) => el.id !== item.id);
+  const handleDelete = (Id) => {
+    
+   
+    const newData = person.filter((el) => el.id !== Id);
+  
     setPerson(newData);
   };
 
@@ -32,7 +36,7 @@ function useCrud() {
     handleToggle,
     handleEdit,
     handleDelete,
-    handleAction,
+    // handleAction,
     handleAdd,
     person,
     showAdd,

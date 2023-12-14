@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import { AiOutlineNumber } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios-instance/apiInstance";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const {register, handleSubmit, formState:{errors}} = useForm ()
   const navigate = useNavigate();
- 
-  const [email, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
-    e.preventDefault();
 
-   axiosInstance
+  const handleLogin = (formData) => {
+    
+    
+    axiosInstance
       .post("/login", {
-        email: email,
-        password: password,
-        device_name: "window",
+        email: formData.email,
+        password: formData.password,
+        device_name: "MacIntel",
       })
       .then((res) => {
         const token = res.data.token;
@@ -29,7 +29,6 @@ const Login = () => {
       .catch((err) => {
         console.error(err);
       });
-    
   };
 
   const handleSignup = (e) => {
@@ -38,7 +37,6 @@ const Login = () => {
   const handleDashboard = () => {
     navigate("/");
   };
-
 
   return (
     <div>
@@ -70,8 +68,8 @@ const Login = () => {
       <div className="grid items-center justify-center h-screen">
         <div className="w-96 bg-gray-100 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-4">Login</h2>
-          <form>
-            <div className="mb-4">
+          <form onSubmit={handleSubmit(handleLogin)}>
+            {/* <div className="mb-4">
               <label htmlFor="username" className="block text-gray-700">
                 Email
               </label>
@@ -82,6 +80,30 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setUsername(e.target.value)}
               />
+            </div> */}
+            <div className="mb-6">
+              {/* <Input label="Email" name="email" register={register} errors={errors}/> */}
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="role"
+              >
+                Email
+              </label>
+              <input
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Please enter a valid email",
+                  },
+                })}
+                className="border border-gray-500 rounded-md"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs italic">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
             <div className="mb-4">
               <label htmlFor="password" className="block text-gray-700">
@@ -89,14 +111,16 @@ const Login = () => {
               </label>
               <input
                 type="password"
-                id="password"
-                className="w-full border rounded-md py-2 px-3"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password",{
+                  required:"Password is Required",
+                })}
               />
+              {errors.password && (  <p className="text-red-500 text-xs italic">
+                  {errors.password.message}
+                </p>)}
             </div>
             <button
-              type="button"
+              type="submit"
               className="bg-blue-500 text-black py-2 px-4 rounded-md  hover:bg-custom-blue"
               onClick={handleLogin}
             >

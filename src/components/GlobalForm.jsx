@@ -4,15 +4,20 @@ import { addData, closeModal } from "../Redux/Slices/AddMember/AddMember";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 import { Input } from "postcss";
-function GlobalForm({onSubmit,h1,modalAction, singleData}) {
-    const dispatch = useDispatch()
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm({
-      defaultValues: {
-        name: singleData?.name || "",
-        email: singleData?.email || "",
-        gender: singleData?.gender || "",
-      },
-    });
+function GlobalForm({ onSubmit, h1, modalAction, singleData }) {
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: singleData?.name || "",
+      email: singleData?.email || "",
+      gender: singleData?.gender || "",
+    },
+  });
 
   const handleClose = () => {
     dispatch(modalAction());
@@ -33,7 +38,7 @@ function GlobalForm({onSubmit,h1,modalAction, singleData}) {
         </div>
 
         <div className="mb-4">
-          {/* <Input label="Name" name="name" register={register} errors={errors}/> */}
+          
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="role"
@@ -41,29 +46,36 @@ function GlobalForm({onSubmit,h1,modalAction, singleData}) {
             Name
           </label>
           <input
-        
-            {...register("name", { required: "name is Required" })}
+            {...register("name", {
+              required: "Name is required",
+              pattern: {
+                value: /^[A-Za-z ]+$/,
+                message: "Please enter a Only character",
+              },
+            })}
             className="border border-gray-500 rounded-md"
           />
           {errors.name && (
-            <p className="text-red-500 text-xs italic">
-              {errors.name.message}
-            </p>
+            <p className="text-red-500 text-xs italic">{errors.name.message}</p>
           )}
         </div>
 
         <div className="mb-6">
-        
           {/* <Input label="Email" name="email" register={register} errors={errors}/> */}
-           <label
+          <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="role"
           >
             Email
           </label>
           <input
-        
-            {...register("email", { required: "email is Required" })}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Please enter a valid email with @ sign",
+              },
+            })}
             className="border border-gray-500 rounded-md"
           />
           {errors.email && (
@@ -71,36 +83,30 @@ function GlobalForm({onSubmit,h1,modalAction, singleData}) {
               {errors.email.message}
             </p>
           )}
-           
         </div>
-        
-        <div>
-          <label class="block mb-2">
+
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="gender"
+          >
             Gender
-            <div class="mt-1">
-              <input
-                type="radio"
-                value="male"
-                {...register("gender", { required: "Gender is required" })}
-              />
-
-              <label for="male" class="mr-4 ml-1">
-                Male
-              </label>
-
-              <input
-                type="radio"
-                value="female"
-                {...register("gender", { required: "Gender is required" })}
-              />
-              <label for="female" className="mr-4 ml-1">
-                Female
-              </label>
-            </div>
-            {errors.gender && (
-              <p className="text-red-500">{errors.gender.message}</p>
-            )}
           </label>
+          <select
+            {...register("gender", { required: "Gender is required" })}
+            className="border border-gray-500 rounded-md"
+          >
+            <option value="" disabled>
+              Select Gender
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          {errors.gender && (
+            <p className="text-red-500 text-xs italic">
+              {errors.gender.message}
+            </p>
+          )}
         </div>
 
         <div className="flex items-center justify-between">
