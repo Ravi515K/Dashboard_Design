@@ -7,8 +7,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { AiFillDelete } from "react-icons/ai";
-import { BiSolidEdit } from "react-icons/bi";
 import TopNavbar from "src/components/TopNavbar";
 import Profile from "../AsideSection/components/Profile";
 import Sidebar from "../AsideSection/components/Sidebar";
@@ -20,9 +18,6 @@ import useCrud from "./hook/useCrud";
 
 function CellReports() {
   const {
-    handleAction,
-    handleDelete,
-    handleEdit,
     handleToggle,
     handleAdd,
     person,
@@ -38,9 +33,25 @@ function CellReports() {
   const [colVisible, setColVisible] = useState({});
 
   const columns = [
+   
     {
       header: "ID",
       accessorKey: "id",
+    },
+    {
+      header:"Profile",
+      accessorKey:"img",
+      cell: (info) => {
+        return (
+          <div className="flex justify-center">
+            <img
+              src={info.row.original.img}  
+              alt={`Profile of ${info.row.original.name}`} 
+              className="w-12 h-12 rounded-full border border-green-300" 
+            />
+          </div>
+        );
+      },
     },
     {
       header: "Name",
@@ -66,28 +77,7 @@ function CellReports() {
         );
       },
     },
-    // {
-    //   header: "Edit",
-    //   accessorKey: "edit",
-    //   cell: (info) => {
-    //     return (
-    //       <button>
-    //         <BiSolidEdit onClick={() => handleEdit(info.row.original)} />
-    //       </button>
-    //     );
-    //   },
-    // },
-    // {
-    //   header: "Delete",
-    //   accessorKey: "delete",
-    //   cell: (info) => {
-    //     return (
-    //       <button>
-    //         <AiFillDelete onClick={() => handleDelete(info.row.original)} />
-    //       </button>
-    //     );
-    //   },
-    // },
+    
   ];
 
   const table = useReactTable({
@@ -95,7 +85,7 @@ function CellReports() {
     columns,
     initialState: {
       pagination: {
-        pageSize: 8,
+        pageSize: 6,
       },
     },
     state: {
@@ -111,7 +101,9 @@ function CellReports() {
     onGlobalfilterchange: setFiltering,
     onColumnVisibilityChange: setColVisible,
   });
- 
+  
+  console.log(showEdit)
+  
   return (
     <div className="w-full flex">
       <div className="w-[20%]">
@@ -213,9 +205,10 @@ function CellReports() {
               </button>
             </div>
           </div>
-          {showEdit ? (
+         {console.log(showEdit)} 
+          {showEdit ? 
             <EditModal obj={editData} person={person} setPerson={setPerson} />
-          ) : null}
+           : null}
           {showAdd ? <AddModal setPerson={setPerson} person={person} /> : null}
         </div>
       </div>

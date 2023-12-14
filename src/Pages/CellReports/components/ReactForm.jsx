@@ -2,14 +2,40 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function ReactForm({ setPerson, person, setIsOpen }) {
-let id=person.length+1 
+  let id = person.length + 1;
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm();
-  const handleAdd = (data) => {
-  
+  } = useForm({
+    defaultValues: {
+      name: "",
+      gender: "",
+      role: "",
+      img: "",
+    },
+  });
+
+  const convertImageToUrl = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(new Blob([file]));
+    });
+  };
+
+  const handleAdd = async (data) => {
+    if (data.img[0]) {
+      const file = data.img[0];
+      const imageUrl = await convertImageToUrl(file);
+      // console.log(imageUrl);
+      setValue("img", imageUrl);
+      data["img"] = imageUrl;
+    }
+
     const userExists = person.some(
       (el) => el.name.toLowerCase() === data.name.toLowerCase()
     );
@@ -17,7 +43,8 @@ let id=person.length+1
     if (userExists) {
       toast.error("User Already Existed");
     } else {
-        setPerson([data,...person])
+      console.log(data);
+      setPerson([data, ...person]);
       toast.success("New User Added");
     }
     setIsOpen(false);
@@ -25,8 +52,10 @@ let id=person.length+1
   return (
     <div className="mt-5">
       <form className="w-full" onSubmit={handleSubmit(handleAdd)}>
-        <div className="flex justify-between">
-          <label htmlFor="">Id :</label>
+        <div className="">
+          <label htmlFor="" className="block">
+            Id
+          </label>
           <input
             value={id}
             {...register("id", { required: "id Required" })}
@@ -36,40 +65,84 @@ let id=person.length+1
         {errors.id && (
           <small className="text-red-500 ml-[120px]">{errors.id.message}</small>
         )}
-        <div className="flex justify-between mt-5">
-          <label htmlFor="">Name :</label>
+        <div className="mt-5">
+          <label className="block">Name :</label>
           <input
-            {...register("name", { required: "name Required" })}
+            {...register("name", {
+              required: "name Required",
+              pattern: {
+                value: /^[A-Za-z ]+$/,
+                message: "Please enter a Only character",
+              },
+            })}
             className="border border-gray-400 rounded-md px-2"
           />
+          {errors.name && (
+            <small className="text-red-500 ml-[120px]">
+              {errors.name.message}
+            </small>
+          )}
         </div>
-        {errors.name && (
-          <small className="text-red-500 ml-[120px]">{errors.name.message}</small>
-        )}
-        <div className="flex justify-between mt-5">
-          <label>Gender :</label>
+
+        <div className="mt-5">
+          <label
+            className=" text-gray-700 text-sm font-bold mb-2 block"
+            htmlFor="gender"
+          >
+            Gender
+          </label>
+          <select
+            {...register("gender", { required: "Gender is required" })}
+            className="w-[200px] border border-gray-500 rounded-md"
+          >
+            <option value="" disabled>
+              Select Gender
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          {errors.gender && (
+            <small className="text-red-500 text-xs italic relative right-[100px] top-5">
+              {errors.gender.message}
+            </small>
+          )}
+        </div>
+
+        <div className="mt-5">
+          <label className="block">Role :</label>
           <input
-           
-            {...register("gender", { required: "gender Required" })}
+            {...register("role", {
+              required: "role Required",
+              pattern: {
+                value: /^[A-Za-z ]+$/,
+                message: "Please enter a Only character",
+              },
+            })}
             className="border border-gray-400 rounded-md px-2"
           />
+          {errors.role && (
+            <small className="text-red-500 block ml-[120px]">
+              {errors.role.message}
+            </small>
+          )}
         </div>
-        {errors.gender && (
-          <small className="text-red-500 ml-[120px]">{errors.gender.message}</small>
-        )}
-        <div className="flex justify-between mt-5">
-          <label htmlFor="">Role :</label>
+        <div className="mt-5">
+          <label className="block">Image:</label>
           <input
-            {...register("role", { required: "role Required" })}
-            className="border border-gray-400 rounded-md px-2"
+            type="file"
+            {...register("img", { required: "choose Image File" })}
+            className="w-[200px] border border-gray-400 rounded-md px-2"
           />
+          {errors?.img && (
+            <small className="text-red-500 ml-[120px]">
+              {errors?.img?.message}
+            </small>
+          )}
         </div>
-        {errors.role && (
-          <small className="text-red-500 block ml-[120px]">{errors.role.message}</small>
-        )}
+
         <div className="flex justify-left mt-7">
           <button
-            type={"submit"}
+            type="submit"
             className="w-16 h-8 p-3 rounded-md border bg-[#91D273] border-black flex justify-center items-center"
           >
             Submit

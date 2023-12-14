@@ -121,7 +121,7 @@ export default function EditModal({ obj, person, setPerson }) {
               )}
               <div className="flex justify-left mt-7">
                 <button
-                  type={"submit"}
+                  type="submit"
                   className="w-16 h-8 p-3 rounded-md border bg-[#91D273] border-black flex justify-center items-center"
                 >
                   Submit

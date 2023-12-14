@@ -87,7 +87,8 @@ function EditModal() {
           <IoIosClose />
         </button>
       </div>
-    </>);
+    </>
+    );
     }else{
        mutation.mutate(data);
        dispatch(addData(data));
@@ -124,7 +125,6 @@ function EditModal() {
     );
 
     const data = await res.json();
-    // console.log(data)
     return data;
   };
   
@@ -137,40 +137,6 @@ function EditModal() {
     },
   });
  
-  // const handleSubmit = (e) => {
-  //   // console.log("id",id,formData)
-  //   e.preventDefault();
-  //   const validationErrors = {};
-
-  //   if (!formData.name) {
-  //     validationErrors.name = "Name is required";
-  //   }
-
-  
-  //   if (!formData.gender) {
-  //     validationErrors.gender = "Gender is required";
-  //   }
-    
-  //   if (!formData.email) {
-  //     validationErrors.email = "email is required";
-  //   }
-
-  //   if (Object.keys(validationErrors).length === 0) {
-  //     mutation.mutate(formData);
-  //     dispatch(addData(formData));
-  //     dispatch(closeEditModal());
-     
-  //     alert("Added Member Successfully");
-      
-  //   } else {
-    
-  //     setErrors(validationErrors);
-  //   }
-  // };
-
-  // const handleClose = () => {
-  //   dispatch(closeEditModal());
-  // };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center z-40">
       {/* <form

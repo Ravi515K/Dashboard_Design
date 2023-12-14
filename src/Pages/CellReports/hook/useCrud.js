@@ -12,31 +12,26 @@ function useCrud() {
     setToggle(!toggle);
   };
 
-  // const handleAction = (obj) => {
-    
-  // };
-
   const handleEdit = (obj) => {
-   
+   console.log("hii")
+   setShowEdit(!showEdit);
     setEditData(obj);
-    setShowEdit(!showEdit);
+ 
   };
   const handleAdd = () => {
     setShowAdd(!showAdd);
   };
   const handleDelete = (Id) => {
-    
-   
+    console.log(Id)
     const newData = person.filter((el) => el.id !== Id);
-  
+    console.log(newData)
     setPerson(newData);
   };
-
+ console.log(showEdit)
   return {
     handleToggle,
     handleEdit,
     handleDelete,
-    // handleAction,
     handleAdd,
     person,
     showAdd,
