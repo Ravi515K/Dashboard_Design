@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react";
-import React, { useState } from "react";
+import { useState } from "react";
+import { AiOutlineNumber } from "react-icons/ai";
 import { BiSolidDashboard } from "react-icons/bi";
 import {
   FaAngleDown,
@@ -9,11 +10,8 @@ import {
   FaMoneyBill,
   FaUsers,
 } from "react-icons/fa";
-import { AiOutlineNumber } from "react-icons/ai";
-import { FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import Menu from "../../../components/Menu";
-import Profile from "./Profile";
 
 function Sidebar({ index }) {
   const navigate = useNavigate();

@@ -36,9 +36,7 @@ function App() {
         <Route path="/detail/:id" element={<DetailPage />}></Route>
         <Route path="/users" element={<Users />} />
         <Route path="/cellreport" element={
-          <RequiredAuth >
             <CellReports />
-          </RequiredAuth> 
         }
           />
       </Routes>

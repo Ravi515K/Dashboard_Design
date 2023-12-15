@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import PageData from "src/Utility/Utlity";
 function Menu({ index }) {
+  const navigate = useNavigate()
   const [activeIndex, setActiveIndex] = useState(index);
   const [arr, setArr] = useState(PageData);
   const dragItem = useRef(null);
@@ -22,11 +23,14 @@ function Menu({ index }) {
 
     setArr(data);
   };
+  const handleItemClick = (path) => {
+    navigate(path)
+  }
   return (
     <>
       {arr.map(({ icon: Icon, name, id, path }, ind) => {
         return (
-          <Link to={path}>
+         
             <li
               key={id}
               draggable
@@ -37,11 +41,11 @@ function Menu({ index }) {
               className={`flex items-center  rounded-lg py-2 my-2 ${
                 activeIndex === ind ? "bg-light-green" : ""
               }`}
-              // onClick={() => handleItemClick(0)}
+               onClick={() => handleItemClick(path)}
             >
               <span className="mr-4 ml-2">{<Icon/>}</span> {name}
             </li>
-          </Link>
+         
         );
       })}
     </>

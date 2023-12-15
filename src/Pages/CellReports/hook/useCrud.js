@@ -14,8 +14,9 @@ function useCrud() {
 
   const handleEdit = (obj) => {
    console.log("hii")
+   setEditData(obj);
    setShowEdit(!showEdit);
-    setEditData(obj);
+    
  
   };
   const handleAdd = () => {
@@ -24,10 +25,10 @@ function useCrud() {
   const handleDelete = (Id) => {
     console.log(Id)
     const newData = person.filter((el) => el.id !== Id);
-    console.log(newData)
+   // console.log(newData)
     setPerson(newData);
   };
- console.log(showEdit)
+ 
   return {
     handleToggle,
     handleEdit,

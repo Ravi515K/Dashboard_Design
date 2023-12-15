@@ -5,9 +5,9 @@ import { DeleteActiveIcon , DeleteInactiveIcon,   EditActiveIcon,EditInactiveIco
 import useCrud from "../hook/useCrud";
 
 
-export default function Action({obj}) {
+export default function Action({obj, handleDelete,handleEdit}) {
  // console.log(obj)
- const {handleEdit, handleDelete} = useCrud()
+//  const {handleEdit, handleDelete} = useCrud()
   return (
     <div className="">
       <Menu as="div" className=" inline-block text-left">

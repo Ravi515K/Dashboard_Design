@@ -18,6 +18,8 @@ import useCrud from "./hook/useCrud";
 
 function CellReports() {
   const {
+    handleDelete,
+    handleEdit,
     handleToggle,
     handleAdd,
     person,
@@ -39,23 +41,20 @@ function CellReports() {
       accessorKey: "id",
     },
     {
-      header:"Profile",
-      accessorKey:"img",
+      header: "Profile",
+      accessorKey: "profileAndName",
       cell: (info) => {
         return (
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center">
             <img
-              src={info.row.original.img}  
-              alt={`Profile of ${info.row.original.name}`} 
-              className="w-12 h-12 rounded-full border border-green-300" 
+              src={info.row.original.img}
+              alt={`Profile of ${info.row.original.name}`}
+              className="w-12 h-12 rounded-full border border-green-300 mr-2"
             />
+            {info.row.original.name}
           </div>
         );
       },
-    },
-    {
-      header: "Name",
-      accessorKey: "name",
     },
     {
       header: "Gender",
@@ -72,7 +71,7 @@ function CellReports() {
        
         return (
           <button>
-            <Action obj={info.row.original}/>
+            <Action obj={info.row.original} handleEdit={handleEdit} handleDelete={handleDelete}/>
           </button>
         );
       },
@@ -102,7 +101,7 @@ function CellReports() {
     onColumnVisibilityChange: setColVisible,
   });
   
-  console.log(showEdit)
+  // console.log(showEdit)
   
   return (
     <div className="w-full flex">
@@ -205,7 +204,9 @@ function CellReports() {
               </button>
             </div>
           </div>
-         {console.log(showEdit)} 
+         {
+         console.log(showEdit)
+         } 
           {showEdit ? 
             <EditModal obj={editData} person={person} setPerson={setPerson} />
            : null}
